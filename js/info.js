@@ -43,13 +43,13 @@ const WEATHER_MSGS = {
     'Shorts weather. No further questions',
   ],
   cold: [
-    'It\'s so cold even the WiFi feels slow',
+    'You better might wanna get some gloves :)',
     'Fondue weather. Mandatory, not optional',
     'Your future self says: bring a scarf. And a jacket. And maybe a blanket',
     'Hot choco season is upon us',
-    'The cold never bothered me anyway... jk it absolutely does',
+    'The cold never bothered me anyway... jk',
     'Glühwein o\'clock',
-    'Layer up or suffer. Your choice',
+    'It\'s cold outside, so layer up or suffer. Your choice',
   ],
   freezing: [
     'It\'s literally freezing. Like, actually below 0',
@@ -61,7 +61,7 @@ const WEATHER_MSGS = {
     'Umbrella check before you leave. You\'re welcome',
     'Wet socks are a vibe. A terrible, terrible vibe',
     'The ducks at the lake are absolutely thriving rn',
-    'Rain jacket > umbrella. Hill I will die on',
+    'Rain jacket w cap> umbrella. Hill I will die on',
     'Pro tip: puddles are deeper than they look',
     'Cozy inside day? Cozy inside day',
     'The sound of rain on the Witelli roof >>> ',
@@ -98,15 +98,13 @@ const WEATHER_MSGS = {
 
 const MORNING_MSGS = [
   'Good morning Witelli crew',
-  'Coffee first, everything else after',
+  'First: coffee (or tea Adam), everything else after',
   'Your bed misses you already. Stay strong',
-  'Step 1: leave bed. Step 2: figure it out',
+  'Step 1: leave bed. Step 2: ???',
   'Did you actually set your alarm or just got lucky?',
-  'Shower thoughts are free but hot water isn\'t',
   'Don\'t forget your keys. Seriously. Check again',
   'Morning person or just awake? There\'s a difference',
   'Alexa, give me motivation. Alexa? ALEXA??',
-  'The early bird gets the tram. The late bird gets the next one',
 ];
 
 const AFTERNOON_MSGS = [
@@ -122,10 +120,10 @@ const AFTERNOON_MSGS = [
 
 const EVENING_MSGS = [
   'What\'s for dinner tonight? And no, cereal doesn\'t count',
-  'Who\'s doing the dishes? Not it. NOT IT',
+  'So uhhh, did you clean the kitchen?',
   'WG dinner hits different when everyone\'s home',
   'The fridge is judging your leftovers. Eat them or free them',
-  'Whoever is cooking tonight... thank you in advance. Legend',
+  'Whoever is cooking tonight... u r a legend',
   'Golden hour at the Zürichsee right now, just saying',
   'Couch or productivity? We both know the answer',
   'Evening plans: exist on the couch. Execute flawlessly',
@@ -140,7 +138,6 @@ const NIGHT_MSGS = [
   'The WiFi is still on but your brain should be off',
   'Fun fact: sleep is free. And you\'re not using it. Weird',
   'Your alarm clock is already dreading tomorrow',
-  'The last tram left a while ago... you\'re committed now',
 ];
 
 // ---- Day of week ----
@@ -153,28 +150,24 @@ const DAY_MSGS = {
     'Another Monday, another chance to pretend you\'re a morning person',
     'If Monday was a tram, it would be delayed. And crowded',
     'The week is fresh, the coffee better be too',
-    'Monday energy: loading... loading... error 404',
+    'Monday energy: loading... loading... 404 not found',
   ],
   2: [
     'Tuesday: Monday\'s less annoying sibling',
-    'It\'s only Tuesday?? Time is broken',
+    'It\'s only Tuesday?? fuckkkk',
     'At least it\'s not Monday anymore. Small wins',
     'Tuesday hack: pretend it\'s already Wednesday. Nobody will notice',
-    'Taco Tuesday but in Switzerland so... Fondue Tuesday?',
   ],
   3: [
-    'It\'s Wednesday my dudes',
-    'Halfway through. The finish line is visible if you squint',
+    'It\'s Wednesdayy we made it halfway aaAAaAAAaAAAAA',
     'Wednesday is proof you survived Monday and Tuesday',
-    'Peak of the week. It\'s all downhill from here (in a good way)',
+    'Peak of the week. It\'s all downhill from here',
     'Hump day! Don\'t ask why it\'s called that',
   ],
   4: [
-    'Thursday: Friday\'s opening act',
     'Almost Friday... almost... ALMOST...',
-    'Tomorrow is Friday. Let that sink in. Marinate in it',
+    'Tomorrow is Friday. Let that sink in. (insert elon meme here)',
     'You can almost taste the weekend from here',
-    'Thursday night plans? Langstrasse is warming up',
     'One more day. ONE. MORE. DAY',
   ],
   5: [
@@ -190,17 +183,14 @@ const DAY_MSGS = {
     'Socially acceptable to do absolutely nothing today',
     'The lake is free. Go touch grass. Then touch water',
     'Saturday brunch is not optional, it\'s a lifestyle choice',
-    'The city is yours today, go get lost somewhere new',
-    'Farmer\'s market at Bürkliplatz? Fresh bread hits different on Saturdays',
     'Sleep in. You earned it. (even if you didn\'t)',
+    'Netflix and chill. Or just chill. Your choice',
   ],
   0: [
-    'Happy Sunday! The recharge episode',
     'Everything is closed and honestly that\'s a blessing',
     'The only plans today should be no plans',
     'Make the most of today. Monday has zero chill',
     'Pro tip: start nothing you can\'t finish before Monday',
-    'Sunday scaries are just Monday being impatient',
     'Enjoy the quiet before the weekly chaos resumes',
   ],
 };
@@ -209,7 +199,6 @@ const DAY_MSGS = {
 
 const QUOTES = [
   '"The only way to do great work is to love what you do" — Steve Jobs probably didn\'t take the tram',
-  '"Be yourself, everyone else is already taken" — Oscar Wilde, also a public transport user',
   '"Life is what happens when you\'re busy checking the departure board" — John Lennon, adapted',
   '"In the middle of difficulty lies opportunity" — Einstein, who also lived in Switzerland btw',
   '"Stay hungry, stay foolish" — good advice unless the Migros is closed',
@@ -230,16 +219,12 @@ const EASTER_EGGS = [
   'Certified WG moment\u2122',
   'Top secret info: you can ask Doruk for free laundry',
   'The Witelli rooftop at sunset > your Instagram feed',
-  'Whoever bought oat milk, you\'re a real one',
   'Spaghetti again? Respect the hustle. Embrace the carbs',
   'Plot twist: you\'re not late, you\'re fashionably on time',
-  'This departure board has more personality than most people',
-  'Fun fact: this thing checks the weather more often than you do',
+  'This departure board has more personality than most people at ETH',
   'Somewhere out there, a SBB conductor is checking tickets. Stay safe',
   'Your rent is due but your vibes are priceless',
-  'WG rule #1: whoever finishes the milk buys new milk. No exceptions',
   'The recycling doesn\'t take itself out. Looking at you',
-  'Someone left their stuff in the dryer again... we all know who',
 ];
 
 // ---- Pool builder ----
