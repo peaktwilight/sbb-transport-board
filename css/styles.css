@@ -108,11 +108,21 @@ body::after {
 .header-center {
   flex: 1;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.2;
+}
+
+.header-day {
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
 }
 
 .header-date {
-  font-size: 1.3rem;
-  font-weight: 700;
+  font-size: 1rem;
+  font-weight: 400;
   letter-spacing: 0.08em;
 }
 
@@ -175,17 +185,27 @@ body::after {
   text-shadow: var(--glow-amber);
 }
 
-/* ---- Screen progress bar ---- */
+/* ---- Screen progress ---- */
 
 .screen-progress {
-  position: absolute;
-  bottom: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 2px;
+  z-index: 100;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0;
   background: var(--amber);
-  box-shadow: 0 0 6px rgba(255, 179, 0, 0.4);
-  transform-origin: left;
-  transform: scaleX(0);
-  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.progress-bar.active {
+  opacity: 1;
 }
 
 /* ---- Screen container & transitions ---- */
@@ -262,7 +282,6 @@ body::after {
   padding: 0.6em 1.2em;
   border-bottom: 1px solid rgba(255, 179, 0, 0.06);
   border-left: 3px solid transparent;
-  animation: rowFadeIn 0.4s ease;
   transition: border-color 0.3s ease;
 }
 
@@ -274,9 +293,24 @@ body::after {
   border-left-color: var(--green-led);
 }
 
-@keyframes rowFadeIn {
-  from { opacity: 0; transform: translateY(-6px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Staggered entrance — departures */
+.screen--entering[data-screen="departures"] .departure-row {
+  animation: row-enter 0.3s ease-out both;
+  animation-delay: calc(var(--i, 0) * 40ms);
+}
+
+/* Staggered entrance — weather */
+.screen--entering[data-screen="info"] .info-weather {
+  animation: row-enter 0.35s ease-out both;
+}
+.screen--entering[data-screen="info"] .info-message {
+  animation: row-enter 0.35s ease-out both;
+  animation-delay: 100ms;
+}
+
+@keyframes row-enter {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 .departure-row--header {

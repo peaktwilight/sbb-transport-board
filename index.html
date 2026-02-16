@@ -18,11 +18,13 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <div class="screen-progress" id="screen-progress"></div>
   <header class="board-header">
     <div class="header-left">
       <span id="clock" class="clock led-text-white">--:--:--.---</span>
     </div>
     <div class="header-center">
+      <span id="header-day" class="header-day led-text-dim"></span>
       <span id="header-date" class="header-date led-text-dim"></span>
     </div>
     <div class="header-right">
@@ -33,7 +35,6 @@
   <nav class="screen-tabs" id="screen-tabs">
     <button class="screen-tab screen-tab--active" data-target="0"><i class="ph-bold ph-train-simple"></i> Departures</button>
     <button class="screen-tab" data-target="1"><i class="ph-bold ph-cloud-sun"></i> Weather</button>
-    <div class="screen-progress" id="screen-progress"></div>
   </nav>
   <div class="screen-container">
     <!-- Screen 1: Departures -->

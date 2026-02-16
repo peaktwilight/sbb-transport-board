@@ -14,6 +14,7 @@ const departuresEl = $('departures-body');
 const statusEl = $('status');
 const tickerEl = $('ticker-track');
 const progressEl = $('screen-progress');
+const headerDayEl = $('header-day');
 const headerDateEl = $('header-date');
 const infoWeatherEl = $('info-weather');
 const infoMessageEl = $('info-message');
@@ -59,7 +60,7 @@ async function requestWakeLock() {
 }
 
 async function init() {
-  startClock(clockEl, headerDateEl);
+  startClock(clockEl, headerDayEl, headerDateEl);
   requestWakeLock();
   initScreens(progressEl, (screen) => {
     if (screen === 'info') updateInfoScreen(infoWeatherEl, infoMessageEl);

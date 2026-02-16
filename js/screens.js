@@ -26,17 +26,30 @@ export function initScreens(progressElement, onScreenSwitch) {
     });
   });
 
+  // Stagger on first load
+  screens[0].classList.add('screen--entering');
+  setTimeout(() => screens[0].classList.remove('screen--entering'), 1200);
+
   resetProgress();
   autoScroll(screens[0]);
   startAutoTimer();
 }
 
+const SCREEN_DURATIONS = [12_000, 8_000]; // departures longer, weather shorter
+
+function getDuration() {
+  return SCREEN_DURATIONS[current] || SCREEN_DURATIONS[0];
+}
+
 function startAutoTimer() {
-  autoTimer = setInterval(next, CONFIG.screenInterval);
+  autoTimer = setTimeout(() => {
+    next();
+    startAutoTimer();
+  }, getDuration());
 }
 
 function restartAutoTimer() {
-  clearInterval(autoTimer);
+  clearTimeout(autoTimer);
   resetProgress();
   startAutoTimer();
 }
@@ -52,11 +65,10 @@ function goTo(target) {
   active.classList.add('screen--in');
   active.offsetHeight;
   active.classList.remove('screen--in');
-  active.classList.add('screen--active');
+  active.classList.add('screen--active', 'screen--entering');
 
-  setTimeout(() => {
-    prev.classList.remove('screen--out');
-  }, 600);
+  setTimeout(() => prev.classList.remove('screen--out'), 600);
+  setTimeout(() => active.classList.remove('screen--entering'), 1200);
 
   updateTabs();
   autoScroll(active);
@@ -125,18 +137,38 @@ function onUserScroll() {
   }, 4000);
 }
 
+let bar = null;
+let animFrame = null;
+
+function easeOutCubic(t) {
+  return 1 - Math.pow(1 - t, 3);
+}
+
 function resetProgress() {
   if (!progressEl) return;
-  const tab = document.querySelector(`.screen-tab[data-target="${current}"]`);
-  if (!tab) return;
-  const nav = tab.parentElement;
-  const navRect = nav.getBoundingClientRect();
-  const tabRect = tab.getBoundingClientRect();
-  progressEl.style.left = `${tabRect.left - navRect.left}px`;
-  progressEl.style.width = `${tabRect.width}px`;
-  progressEl.style.transition = 'none';
-  progressEl.style.transform = 'scaleX(0)';
-  progressEl.offsetHeight;
-  progressEl.style.transition = `transform ${CONFIG.screenInterval}ms linear`;
-  progressEl.style.transform = 'scaleX(1)';
+  cancelAnimationFrame(animFrame);
+
+  if (!bar || !bar.parentElement) {
+    progressEl.innerHTML = '<div class="progress-bar"></div>';
+    bar = progressEl.querySelector('.progress-bar');
+  }
+
+  const duration = getDuration();
+  const reverse = current === 1; // weather drains back down
+
+  bar.classList.add('active');
+  bar.style.width = reverse ? '100%' : '0';
+
+  requestAnimationFrame(() => {
+    const start = performance.now();
+
+    function tick(now) {
+      const linear = Math.min((now - start) / duration, 1);
+      const t = easeOutCubic(linear);
+      bar.style.width = reverse ? `${(1 - t) * 100}%` : `${t * 100}%`;
+      if (linear < 1) animFrame = requestAnimationFrame(tick);
+    }
+
+    animFrame = requestAnimationFrame(tick);
+  });
 }

@@ -33,6 +33,7 @@ export function renderStationboard(departures, container) {
 
     const row = document.createElement('div');
     row.className = `departure-row${isGo ? ' departure-row--go' : ''}`;
+    row.style.setProperty('--i', container.children.length);
     row.innerHTML = `
       <div class="departure-line">
         <span class="line-badge ${badgeClass}"${style}>
