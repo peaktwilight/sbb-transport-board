@@ -108,7 +108,7 @@ export function renderMarkets(container) {
     return;
   }
 
-  let html = '';
+  let html = '<div class="markets-grid">';
 
   // Crypto section
   if (cachedCrypto) {
@@ -151,5 +151,6 @@ export function renderMarkets(container) {
     html += `<div class="market-updated led-text-dim">Updated ${timeStr}</div>`;
   }
 
+  html += '</div>';
   container.innerHTML = html;
 }
