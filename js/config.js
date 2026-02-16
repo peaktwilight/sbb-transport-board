@@ -4,7 +4,7 @@ export const CONFIG = {
   apiBase: 'https://transport.opendata.ch/v1',
 
   stationboardRefresh: 30_000,
-  connectionsRefresh: 120_000,
+  connectionsRefresh: 180_000,
   clockRefresh: 1_000,
   pageReload: 6 * 60 * 60 * 1000,
 

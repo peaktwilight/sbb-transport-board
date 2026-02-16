@@ -29,7 +29,7 @@ export async function fetchAllConnections() {
     } catch (err) {
       console.warn(`Failed to fetch ${dest.name}:`, err);
     }
-    await delay(1500);
+    await delay(2500);
   }
   return results;
 }

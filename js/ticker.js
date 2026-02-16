@@ -1,5 +1,5 @@
 const ALWAYS = [
-  'Walk to Balgrist stop: ~4 minutes',
+  'Walk to Balgrist stop: ~4 min (1 min if you\'re feeling lucky and wanna sprint)',
   'Made with \u2665 for the best WG in Zürich',
 ];
 
