@@ -591,12 +591,6 @@ body::after {
   background: rgba(255, 179, 0, 0.03);
 }
 
-.info-walk {
-  font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  gap: 0.4em;
-}
 
 /* ---- Footer (ticker + status + dots) ---- */
 

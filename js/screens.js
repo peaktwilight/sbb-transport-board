@@ -75,17 +75,33 @@ function updateTabs() {
 }
 
 let scrollDirection = 1;
-const SCROLL_PAUSE = 2000; // pause at top/bottom before reversing
+const SCROLL_PAUSE = 2000;
 let scrollPauseUntil = 0;
+let userScrolling = false;
+let userScrollTimeout = null;
+let currentScrollBody = null;
 
 function autoScroll(screen) {
   if (scrollTimer) clearInterval(scrollTimer);
+  // Clean up previous listener
+  if (currentScrollBody) {
+    currentScrollBody.removeEventListener('wheel', onUserScroll);
+    currentScrollBody.removeEventListener('touchstart', onUserScroll);
+  }
   const body = screen.querySelector('.screen-body');
-  if (!body) return;
+  if (!body) { currentScrollBody = null; return; }
+  currentScrollBody = body;
   body.scrollTop = 0;
   scrollDirection = 1;
+  userScrolling = false;
   scrollPauseUntil = Date.now() + SCROLL_PAUSE;
+
+  // User scroll overrides auto-scroll, resumes after 4s of inactivity
+  body.addEventListener('wheel', onUserScroll, { passive: true });
+  body.addEventListener('touchstart', onUserScroll, { passive: true });
+
   scrollTimer = setInterval(() => {
+    if (userScrolling) return;
     const maxScroll = body.scrollHeight - body.clientHeight;
     if (maxScroll <= 0) return;
     if (Date.now() < scrollPauseUntil) return;
@@ -98,6 +114,15 @@ function autoScroll(screen) {
       scrollPauseUntil = Date.now() + SCROLL_PAUSE;
     }
   }, 50);
+}
+
+function onUserScroll() {
+  userScrolling = true;
+  clearTimeout(userScrollTimeout);
+  userScrollTimeout = setTimeout(() => {
+    userScrolling = false;
+    scrollPauseUntil = Date.now() + SCROLL_PAUSE;
+  }, 4000);
 }
 
 function resetProgress() {
