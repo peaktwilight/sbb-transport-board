@@ -15,6 +15,7 @@ export const CONFIG = {
     { name: 'ETH Hönggerberg', query: 'Zürich, ETH Hönggerberg' },
     { name: 'UZH Irchel', query: 'Zürich, Universität Irchel' },
     { name: 'HB Zürich', query: 'Zürich HB' },
+    { name: 'Oerlikon', query: 'Zürich Oerlikon' },
     { name: 'Brugg/Windisch', query: 'Brugg AG' },
     { name: 'Limmatplatz', query: 'Zürich, Limmatplatz' },
     { name: 'Meilen', query: 'Meilen' },
