@@ -6,7 +6,15 @@ function cleanDestination(name) {
 }
 
 function minuteClass(mins) {
-  return mins < 1 ? 'minutes--imminent' : mins <= 3 ? 'minutes--soon' : '';
+  if (mins < 1) return 'minutes--imminent';
+  if (mins <= 3) return 'minutes--soon';
+  if (mins <= CONFIG.walkingTime + 2) return 'minutes--go';
+  return '';
+}
+
+function badgeStyle(category, number) {
+  const color = CONFIG.lineColors?.[`${category}${number}`];
+  return color ? ` style="background:${color}"` : '';
 }
 
 export function renderStationboard(departures, container) {
@@ -18,14 +26,16 @@ export function renderStationboard(departures, container) {
     if (countdown.totalSecs <= 0) continue;
 
     const badgeClass = CONFIG.categoryClasses[dep.category] || 'line-badge--default';
+    const style = badgeStyle(dep.category, dep.number);
     const delayHtml = dep.stop.delay > 0
       ? `<span class="delay-indicator">+${dep.stop.delay}</span>` : '';
+    const isGo = countdown.mins > 3 && countdown.mins <= CONFIG.walkingTime + 2;
 
     const row = document.createElement('div');
-    row.className = 'departure-row';
+    row.className = `departure-row${isGo ? ' departure-row--go' : ''}`;
     row.innerHTML = `
       <div class="departure-line">
-        <span class="line-badge ${badgeClass}">
+        <span class="line-badge ${badgeClass}"${style}>
           <span class="line-category">${dep.category}</span>
           <span class="line-number">${dep.number}</span>
         </span>
@@ -49,5 +59,6 @@ export function updateCountdowns(departures, container) {
       el.textContent = countdown.text;
       el.className = `departure-minutes led-text ${minuteClass(countdown.mins)}`;
     }
+    row.classList.toggle('departure-row--go', countdown.mins > 3 && countdown.mins <= CONFIG.walkingTime + 2);
   });
 }

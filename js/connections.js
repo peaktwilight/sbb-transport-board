@@ -1,15 +1,14 @@
 import { CONFIG } from './config.js';
 import { formatTime, getCountdown } from './clock.js';
 
-function parseDuration(str) {
-  const m = str.match(/(\d+)d(\d+):(\d+):(\d+)/);
-  if (!m) return str;
-  return `${parseInt(m[1]) * 1440 + parseInt(m[2]) * 60 + parseInt(m[3])} min`;
-}
-
 function getFirstTransport(conn) {
   const s = conn.sections?.find((s) => s.journey);
   return s ? { category: s.journey.category, number: s.journey.number } : null;
+}
+
+function badgeStyle(category, number) {
+  const color = CONFIG.lineColors?.[`${category}${number}`];
+  return color ? ` style="background:${color}"` : '';
 }
 
 function renderSection({ destination, connections }) {
@@ -30,10 +29,12 @@ function renderSection({ destination, connections }) {
     const badgeClass = transport
       ? CONFIG.categoryClasses[transport.category] || 'line-badge--default'
       : 'line-badge--default';
+    const style = transport ? badgeStyle(transport.category, transport.number) : '';
     const badgeHtml = transport
-      ? `<span class="line-badge line-badge--sm ${badgeClass}">${transport.category} ${transport.number}</span>`
+      ? `<span class="line-badge line-badge--sm ${badgeClass}"${style}>${transport.category} ${transport.number}</span>`
       : '';
     const minuteClass = countdown.mins < 3 ? 'minutes--imminent' : countdown.mins <= 5 ? 'minutes--soon' : '';
+    const arrivalHtml = conn.to?.arrival ? formatTime(conn.to.arrival) : '';
 
     const row = document.createElement('div');
     row.className = 'connection-row';
@@ -42,7 +43,7 @@ function renderSection({ destination, connections }) {
       <div class="conn-badge">${badgeHtml}</div>
       <div class="conn-depart led-text">${formatTime(conn.from.departure)}</div>
       <div class="conn-minutes led-text ${minuteClass}">${countdown.text}</div>
-      <div class="conn-duration led-text-dim">${parseDuration(conn.duration)}</div>
+      <div class="conn-arrive led-text-dim">${arrivalHtml}</div>
     `;
     section.appendChild(row);
   }

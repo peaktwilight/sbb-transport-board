@@ -71,7 +71,7 @@ async function init() {
   setInterval(updateStationboard, CONFIG.stationboardRefresh);
   setInterval(updateConnections, CONFIG.connectionsRefresh);
   setInterval(tick, CONFIG.clockRefresh);
-  setInterval(() => fetchWeather(weatherEl), 10 * 60_000);
+  setInterval(() => fetchWeather(weatherEl), CONFIG.weatherRefresh);
   setTimeout(() => location.reload(), CONFIG.pageReload);
 }
 

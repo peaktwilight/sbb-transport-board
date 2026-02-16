@@ -156,11 +156,6 @@ body::after {
   font-size: 0.55rem;
 }
 
-.header-center {
-  flex: 1;
-  text-align: center;
-}
-
 .station-name {
   font-size: 1.6rem;
   font-weight: 800;
@@ -255,7 +250,22 @@ body::after {
   align-items: center;
   padding: 0.5em 1em;
   border-bottom: 1px solid rgba(255, 179, 0, 0.06);
-  transition: opacity 0.3s ease;
+  border-left: 3px solid transparent;
+  animation: rowFadeIn 0.4s ease;
+  transition: border-color 0.3s ease;
+}
+
+.departure-row:nth-child(even) {
+  background: rgba(255, 179, 0, 0.025);
+}
+
+.departure-row--go {
+  border-left-color: var(--green-led);
+}
+
+@keyframes rowFadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .departure-row--header {
@@ -265,6 +275,8 @@ body::after {
   letter-spacing: 0.12em;
   font-weight: 400;
   border-bottom: 1px solid var(--board-border);
+  border-left: none;
+  animation: none;
 }
 
 .departure-row--header > div {
@@ -347,6 +359,11 @@ body::after {
   color: var(--amber-glow) !important;
 }
 
+.minutes--go {
+  color: var(--green-led) !important;
+  text-shadow: 0 0 6px rgba(0, 204, 68, 0.4) !important;
+}
+
 @keyframes pulse {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.4; }
@@ -380,11 +397,12 @@ body::after {
 
 .connection-row {
   display: grid;
-  grid-template-columns: auto 50px 50px 55px;
+  grid-template-columns: auto 50px 50px 50px;
   align-items: center;
   gap: 0.4em;
   padding: 0.25em 0;
   font-size: 0.82rem;
+  animation: rowFadeIn 0.3s ease;
 }
 
 .conn-badge {
@@ -400,13 +418,10 @@ body::after {
   font-weight: 800;
 }
 
-.conn-duration {
+.conn-arrive {
   font-size: 0.75rem;
-}
-
-.conn-transfers {
-  font-size: 0.72rem;
   text-align: right;
+  font-variant-numeric: tabular-nums;
 }
 
 /* ---- Ticker bar ---- */
