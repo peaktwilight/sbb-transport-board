@@ -25,7 +25,7 @@
   --glow-white: 0 0 6px rgba(255, 255, 255, 0.3);
   --glow-red: 0 0 6px rgba(255, 26, 26, 0.5);
 
-  --footer-height: 32px;
+  --footer-height: 42px;
 }
 
 /* ---- Reset & Base ---- */
@@ -627,7 +627,7 @@ body::after {
 }
 
 .status-label {
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.15em;
   flex-shrink: 0;
@@ -661,7 +661,7 @@ body::after {
   white-space: nowrap;
   animation: ticker 50s linear infinite;
   color: var(--amber-dim);
-  font-size: 0.72rem;
+  font-size: 0.85rem;
   font-weight: 400;
   letter-spacing: 0.05em;
 }

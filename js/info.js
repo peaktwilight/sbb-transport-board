@@ -231,6 +231,7 @@ const EASTER_EGGS = [
   'I\'ve been running for hours straight. Where\'s MY coffee?',
   'Whoever left dishes in the sink... the sink remembers',
   'The shower drain is not going to unclog itself',
+  'Life is short. The wait for the tram is not',
 ];
 
 // ---- Pool builder ----
