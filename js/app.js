@@ -6,12 +6,13 @@ import { startClock } from './clock.js';
 import { fetchWeather, currentWeatherCode, currentTemp } from './weather.js';
 import { buildTicker } from './ticker.js';
 
-const clockEl = document.getElementById('clock');
-const departuresEl = document.getElementById('departures-body');
-const connectionsEl = document.getElementById('connections-body');
-const statusEl = document.getElementById('status');
-const weatherEl = document.getElementById('weather');
-const tickerEl = document.getElementById('ticker-track');
+const $ = (id) => document.getElementById(id);
+const clockEl = $('clock');
+const departuresEl = $('departures-body');
+const connectionsEl = $('connections-body');
+const statusEl = $('status');
+const weatherEl = $('weather');
+const tickerEl = $('ticker-track');
 
 let currentDepartures = [];
 let lastSuccessTime = Date.now();
@@ -32,64 +33,45 @@ async function updateConnections() {
   if (!connectionsEl.querySelector('.connection-section')) {
     connectionsEl.innerHTML = '<div class="connections-loading led-text-dim">Loading connections...</div>';
   }
-  await fetchConnectionsStreaming((data) => {
-    appendConnection(data, connectionsEl);
-  });
+  await fetchConnectionsStreaming((data) => appendConnection(data, connectionsEl));
 }
 
-function tickCountdowns() {
-  if (currentDepartures.length > 0) {
-    updateCountdowns(currentDepartures, departuresEl);
-  }
+function tick() {
+  if (currentDepartures.length) updateCountdowns(currentDepartures, departuresEl);
   updateConnectionCountdowns(connectionsEl);
-
-  if (Date.now() - lastSuccessTime > 120_000) {
-    setStatus('stale');
-  }
+  if (Date.now() - lastSuccessTime > 120_000) setStatus('stale');
 }
 
 function setStatus(state) {
-  if (statusEl) {
-    statusEl.className = `status-label status-${state}`;
-    statusEl.textContent = state === 'ok' ? 'LIVE' : state === 'error' ? 'OFFLINE' : 'STALE';
-  }
-}
-
-async function initWeatherAndTicker() {
-  await fetchWeather(weatherEl);
-  buildTicker(tickerEl, currentWeatherCode, currentTemp);
+  if (!statusEl) return;
+  statusEl.className = `status-label status-${state}`;
+  statusEl.textContent = state === 'ok' ? 'LIVE' : state === 'error' ? 'OFFLINE' : 'STALE';
 }
 
 async function requestWakeLock() {
+  if (!('wakeLock' in navigator)) return;
   try {
-    if ('wakeLock' in navigator) {
-      let lock = await navigator.wakeLock.request('screen');
-      document.addEventListener('visibilitychange', async () => {
-        if (document.visibilityState === 'visible') {
-          lock = await navigator.wakeLock.request('screen');
-        }
-      });
-    }
-  } catch (err) {
-    console.warn('Wake Lock not available:', err);
-  }
+    await navigator.wakeLock.request('screen');
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') navigator.wakeLock.request('screen');
+    });
+  } catch {}
 }
 
-function init() {
+async function init() {
   startClock(clockEl);
   requestWakeLock();
-
   buildTicker(tickerEl, null, null);
 
   updateStationboard();
   updateConnections();
-  initWeatherAndTicker();
+
+  fetchWeather(weatherEl).then(() => buildTicker(tickerEl, currentWeatherCode, currentTemp));
 
   setInterval(updateStationboard, CONFIG.stationboardRefresh);
   setInterval(updateConnections, CONFIG.connectionsRefresh);
-  setInterval(tickCountdowns, CONFIG.clockRefresh);
-  setInterval(() => fetchWeather(weatherEl), 10 * 60 * 1000);
-
+  setInterval(tick, CONFIG.clockRefresh);
+  setInterval(() => fetchWeather(weatherEl), 10 * 60_000);
   setTimeout(() => location.reload(), CONFIG.pageReload);
 }
 
