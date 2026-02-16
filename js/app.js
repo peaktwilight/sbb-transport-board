@@ -1,7 +1,7 @@
 import { CONFIG } from './config.js';
-import { fetchStationboard, fetchAllConnections } from './api.js';
+import { fetchStationboard, fetchConnectionsStreaming } from './api.js';
 import { renderStationboard, updateCountdowns } from './board.js';
-import { renderConnections, updateConnectionCountdowns } from './connections.js';
+import { appendConnection, updateConnectionCountdowns } from './connections.js';
 import { startClock } from './clock.js';
 import { fetchWeather, currentWeatherCode, currentTemp } from './weather.js';
 import { buildTicker } from './ticker.js';
@@ -32,12 +32,9 @@ async function updateConnections() {
   if (!connectionsEl.querySelector('.connection-section')) {
     connectionsEl.innerHTML = '<div class="connections-loading led-text-dim">Loading connections...</div>';
   }
-  try {
-    const data = await fetchAllConnections();
-    renderConnections(data, connectionsEl);
-  } catch (err) {
-    console.error('Connections fetch failed:', err);
-  }
+  await fetchConnectionsStreaming((data) => {
+    appendConnection(data, connectionsEl);
+  });
 }
 
 function tickCountdowns() {
@@ -82,7 +79,6 @@ function init() {
   startClock(clockEl);
   requestWakeLock();
 
-  // Show ticker immediately with default messages, then update after weather loads
   buildTicker(tickerEl, null, null);
 
   updateStationboard();

@@ -20,16 +20,14 @@ function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export async function fetchAllConnections() {
-  const results = [];
+export async function fetchConnectionsStreaming(onResult) {
   for (const dest of CONFIG.destinations) {
     try {
       const connections = await fetchConnections(dest.query);
-      results.push({ destination: dest.name, connections });
+      onResult({ destination: dest.name, connections });
     } catch (err) {
       console.warn(`Failed to fetch ${dest.name}:`, err);
     }
     await delay(2500);
   }
-  return results;
 }
