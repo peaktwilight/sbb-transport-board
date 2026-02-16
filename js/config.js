@@ -3,16 +3,16 @@ export const CONFIG = {
   stationboardLimit: 15,
   apiBase: 'https://transport.opendata.ch/v1',
 
-  stationboardRefresh: 30_000,
-  connectionsRefresh: 180_000,
+  stationboardRefresh: 45_000,
+  connectionsRefresh: 15 * 60_000, // 15 min (daily limit: 1000 connection searches)
   clockRefresh: 1_000,
   weatherRefresh: 10 * 60_000,
+  screenInterval: 12_000, // switch screens every 12s
   pageReload: 6 * 60 * 60_000,
 
   destinations: [
-    { name: 'ETH Zentrum', query: 'Zürich, ETH/Universitätsspital' },
+    { name: 'ETH/UZH Zentrum', query: 'Zürich, ETH/Universitätsspital' },
     { name: 'ETH Hönggerberg', query: 'Zürich, ETH Hönggerberg' },
-    { name: 'UZH Zentrum', query: 'Zürich, ETH/Universitätsspital' },
     { name: 'UZH Irchel', query: 'Zürich, Universität Irchel' },
     { name: 'HB Zürich', query: 'Zürich HB' },
     { name: 'Brugg/Windisch', query: 'Brugg AG' },
@@ -39,6 +39,17 @@ export const CONFIG = {
     IR: 'ph-train',
     IC: 'ph-train',
     RE: 'ph-train',
+  },
+
+  // Markets screen
+  markets: {
+    crypto: ['bitcoin', 'ethereum', 'solana', 'dogecoin'],
+    stocks: ['NVDA', 'AAPL', 'GOOGL'],
+    forex: [
+      { from: 'USD', to: 'CHF' },
+      { from: 'EUR', to: 'CHF' },
+    ],
+    refreshInterval: 5 * 60_000,
   },
 
   // ZVV per-line colors (override category default)

@@ -18,20 +18,26 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <div class="board-container">
+  <header class="board-header">
+    <div class="header-left">
+      <span id="clock" class="clock led-text-white">--:--:--.---</span>
+    </div>
+    <div class="header-right">
+      <h1 class="station-name led-text-white">Balgrist</h1>
+    </div>
+  </header>
 
-    <header class="board-header">
-      <div class="header-left">
-        <span id="clock" class="clock led-text-white">--:--:--</span>
-        <span id="weather" class="weather led-text-dim"></span>
-      </div>
-      <div class="header-right">
-        <h1 class="station-name led-text-white">Balgrist</h1>
-      </div>
-    </header>
-
-    <section class="departures-panel board-panel">
-      <div class="panel-header">
+  <nav class="screen-tabs" id="screen-tabs">
+    <button class="screen-tab screen-tab--active" data-target="0"><i class="ph-bold ph-train-simple"></i> Departures</button>
+    <button class="screen-tab" data-target="1"><i class="ph-bold ph-path"></i> Connections</button>
+    <button class="screen-tab" data-target="2"><i class="ph-bold ph-chart-line-up"></i> Markets</button>
+    <button class="screen-tab" data-target="3"><i class="ph-bold ph-cloud-sun"></i> Weather</button>
+    <div class="screen-progress" id="screen-progress"></div>
+  </nav>
+  <div class="screen-container">
+    <!-- Screen 1: Departures -->
+    <section class="screen screen--active" data-screen="departures">
+      <div class="screen-header">
         <div class="departure-row departure-row--header">
           <div class="departure-line">Line</div>
           <div class="departure-destination">Destination</div>
@@ -39,19 +45,40 @@
           <div class="departure-minutes">In</div>
         </div>
       </div>
-      <div id="departures-body" class="panel-body"></div>
+      <div id="departures-body" class="screen-body"></div>
     </section>
 
-    <aside class="connections-panel board-panel">
-      <div class="panel-header">
-        <h2 class="connections-title led-text-white">Connections</h2>
+    <!-- Screen 2: Connections -->
+    <section class="screen" data-screen="connections">
+      <div class="screen-header">
+        <h2 class="screen-title led-text-white">Connections</h2>
       </div>
-      <div id="connections-body" class="panel-body"></div>
-    </aside>
+      <div id="connections-body" class="screen-body"></div>
+    </section>
 
+    <!-- Screen 3: Markets -->
+    <section class="screen" data-screen="markets">
+      <div class="screen-header">
+        <h2 class="screen-title led-text-white">Markets</h2>
+      </div>
+      <div id="markets-body" class="screen-body"></div>
+    </section>
+
+    <!-- Screen 4: Info -->
+    <section class="screen" data-screen="info">
+      <div class="info-screen">
+        <div class="info-weather" id="info-weather"></div>
+        <div class="info-date" id="info-date"></div>
+        <div class="info-message led-text" id="info-message"></div>
+        <div class="info-walk led-text-dim">
+          <i class="ph-bold ph-person-simple-walk"></i>
+          ~4 min walk to Balgrist stop
+        </div>
+      </div>
+    </section>
   </div>
 
-  <div class="ticker-bar">
+  <div class="board-footer">
     <span id="status" class="status-label status-ok">LIVE</span>
     <div class="ticker-track" id="ticker-track"></div>
   </div>

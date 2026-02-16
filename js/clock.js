@@ -14,14 +14,12 @@ export function getCountdown(isoString) {
 }
 
 export function startClock(element) {
+  const pad2 = (n) => String(n).padStart(2, '0');
+  const pad3 = (n) => String(n).padStart(3, '0');
   function update() {
     const now = new Date();
-    element.textContent = now.toLocaleTimeString('de-CH', {
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-    });
+    element.textContent = `${pad2(now.getHours())}:${pad2(now.getMinutes())}:${pad2(now.getSeconds())}.${pad3(now.getMilliseconds())}`;
   }
   update();
-  return setInterval(update, 1000);
+  return setInterval(update, 37); // ~27fps for smooth ms ticking
 }

@@ -29,7 +29,7 @@ const AFTERNOON = [
 const EVENING = [
   'Bon appetit! Enjoy your dinner',
   'What\'s for dinner tonight?',
-  'Netflix or actually being productive? Choose wisely',
+  'Couch or productivity? We both know the answer',
   'The couch is calling your name',
   'Who\'s doing the dishes tonight? Not it',
   'WG dinner hits different when everyone\'s home',
@@ -52,7 +52,7 @@ const NIGHT = [
 ];
 
 const MONDAY = [
-  'It\'s Monday. Deep breaths',
+  'Bruhhh it\'s Monday again :\')',
   'Monday motivation: only 4 days until Friday',
   'Mondays are just Sunday\'s evil twin',
   'New week, new chances to miss the tram',
@@ -60,7 +60,6 @@ const MONDAY = [
   'The week is fresh, the coffee better be too',
   'Monday tip: lower your expectations and you can\'t be disappointed',
   'If Monday was a tram, it would be delayed',
-  'Monday is just a speed bump before the weekend',
   'Another Monday, another chance to pretend you\'re a morning person',
 ];
 
@@ -167,7 +166,7 @@ const WEATHER_RAIN = [
   'Grab your rain jacket before heading out',
   'Rain check on outdoor plans? Literally',
   'Wet socks are a vibe. A terrible, terrible vibe',
-  'Netflix and rain? Classic combo',
+  'Perfect excuse to stay in today',
   'The ducks at the lake are thriving though',
 ];
 

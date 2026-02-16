@@ -56,27 +56,18 @@ const WEATHER_ICONS = {
 
 export let currentWeatherCode = null;
 export let currentTemp = null;
+export let currentFeelsLike = null;
+export let currentWind = null;
 
-export async function fetchWeather(element) {
+export async function fetchWeather() {
   try {
     const res = await fetch(WEATHER_URL);
     if (!res.ok) return;
     const data = await res.json();
     currentTemp = Math.round(data.current.temperature_2m);
     currentWeatherCode = data.current.weather_code;
-    const feelsLike = Math.round(data.current.apparent_temperature);
-    const wind = Math.round(data.current.wind_speed_10m);
-    const desc = WEATHER_DESC[currentWeatherCode] || 'Unknown';
-    const icon = WEATHER_ICONS[currentWeatherCode] || 'ph-thermometer';
-
-    element.innerHTML = `
-      <span class="weather-top">
-        <i class="ph-bold ${icon} weather-icon"></i>
-        <span class="weather-temp">${currentTemp}°C</span>
-        <span class="weather-desc">${desc}</span>
-      </span>
-      <span class="weather-detail">Feels ${feelsLike}° · Wind ${wind} km/h</span>
-    `;
+    currentFeelsLike = Math.round(data.current.apparent_temperature);
+    currentWind = Math.round(data.current.wind_speed_10m);
   } catch (err) {
     console.warn('Weather fetch failed:', err);
   }
