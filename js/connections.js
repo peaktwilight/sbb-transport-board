@@ -30,8 +30,9 @@ function renderSection({ destination, connections }) {
       ? CONFIG.categoryClasses[transport.category] || 'line-badge--default'
       : 'line-badge--default';
     const style = transport ? badgeStyle(transport.category, transport.number) : '';
+    const icon = transport ? CONFIG.categoryIcons[transport.category] || 'ph-path' : '';
     const badgeHtml = transport
-      ? `<span class="line-badge line-badge--sm ${badgeClass}"${style}>${transport.category} ${transport.number}</span>`
+      ? `<span class="line-badge line-badge--sm ${badgeClass}"${style}><i class="ph-bold ${icon} line-icon"></i> ${transport.number}</span>`
       : '';
     const minuteClass = countdown.mins < 3 ? 'minutes--imminent' : countdown.mins <= 5 ? 'minutes--soon' : '';
     const arrivalHtml = conn.to?.arrival ? formatTime(conn.to.arrival) : '';

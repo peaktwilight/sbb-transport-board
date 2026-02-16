@@ -133,8 +133,14 @@ body::after {
 
 .weather-top {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 0.4em;
+}
+
+.weather-icon {
+  font-size: 1.1rem;
+  color: var(--amber);
+  text-shadow: var(--glow-amber);
 }
 
 .weather-temp {
@@ -177,6 +183,10 @@ body::after {
   font-weight: 700;
   letter-spacing: 0.15em;
   flex-shrink: 0;
+  background: var(--board-surface);
+  padding: 0.2em 0.6em;
+  border-right: 1px solid var(--board-border);
+  z-index: 1;
 }
 
 .status-ok {
@@ -326,9 +336,10 @@ body::after {
   padding: 0.1em 0.3em;
 }
 
-.line-category {
-  opacity: 0.85;
-  font-size: 0.8em;
+.line-icon {
+  font-size: 0.9em;
+  opacity: 0.9;
+  line-height: 1;
 }
 
 .line-badge--tram { background: var(--tram-red); }
@@ -438,8 +449,6 @@ body::after {
   display: flex;
   align-items: center;
   z-index: 200;
-  gap: 0.8em;
-  padding-left: 0.8em;
 }
 
 .ticker-track {

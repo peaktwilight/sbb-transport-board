@@ -32,6 +32,15 @@ export const CONFIG = {
     RE: 'line-badge--ir',
   },
 
+  categoryIcons: {
+    T: 'ph-tram',
+    B: 'ph-bus',
+    S: 'ph-train-simple',
+    IR: 'ph-train',
+    IC: 'ph-train',
+    RE: 'ph-train',
+  },
+
   // ZVV per-line colors (override category default)
   lineColors: {
     T2: '#DC143C',

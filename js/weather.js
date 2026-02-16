@@ -27,6 +27,33 @@ const WEATHER_DESC = {
   99: 'Severe thunderstorm',
 };
 
+const WEATHER_ICONS = {
+  0: 'ph-sun',
+  1: 'ph-sun',
+  2: 'ph-cloud-sun',
+  3: 'ph-cloud',
+  45: 'ph-cloud-fog',
+  48: 'ph-cloud-fog',
+  51: 'ph-cloud-rain',
+  53: 'ph-cloud-rain',
+  55: 'ph-cloud-rain',
+  61: 'ph-cloud-rain',
+  63: 'ph-cloud-rain',
+  65: 'ph-cloud-rain',
+  71: 'ph-snowflake',
+  73: 'ph-snowflake',
+  75: 'ph-snowflake',
+  77: 'ph-snowflake',
+  80: 'ph-cloud-rain',
+  81: 'ph-cloud-rain',
+  82: 'ph-cloud-rain',
+  85: 'ph-snowflake',
+  86: 'ph-snowflake',
+  95: 'ph-cloud-lightning',
+  96: 'ph-cloud-lightning',
+  99: 'ph-cloud-lightning',
+};
+
 export let currentWeatherCode = null;
 export let currentTemp = null;
 
@@ -40,9 +67,11 @@ export async function fetchWeather(element) {
     const feelsLike = Math.round(data.current.apparent_temperature);
     const wind = Math.round(data.current.wind_speed_10m);
     const desc = WEATHER_DESC[currentWeatherCode] || 'Unknown';
+    const icon = WEATHER_ICONS[currentWeatherCode] || 'ph-thermometer';
 
     element.innerHTML = `
       <span class="weather-top">
+        <i class="ph-bold ${icon} weather-icon"></i>
         <span class="weather-temp">${currentTemp}°C</span>
         <span class="weather-desc">${desc}</span>
       </span>

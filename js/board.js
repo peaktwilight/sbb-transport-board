@@ -36,7 +36,7 @@ export function renderStationboard(departures, container) {
     row.innerHTML = `
       <div class="departure-line">
         <span class="line-badge ${badgeClass}"${style}>
-          <span class="line-category">${dep.category}</span>
+          <i class="ph-bold ${CONFIG.categoryIcons[dep.category] || 'ph-path'} line-icon"></i>
           <span class="line-number">${dep.number}</span>
         </span>
       </div>
