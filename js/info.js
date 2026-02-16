@@ -280,7 +280,7 @@ function pickMessage() {
   return msg;
 }
 
-export function updateInfoScreen(weatherEl, dateEl, messageEl) {
+export function updateInfoScreen(weatherEl, messageEl) {
   if (currentWeatherCode !== null && currentTemp !== null) {
     const icon = WEATHER_ICONS[currentWeatherCode] || 'ph-thermometer';
     const desc = WEATHER_DESC[currentWeatherCode] || '';
@@ -294,11 +294,6 @@ export function updateInfoScreen(weatherEl, dateEl, messageEl) {
       ${detailParts.length ? `<span class="info-weather-detail">${detailParts.join(' · ')}</span>` : ''}
     `;
   }
-
-  const now = new Date();
-  const day = now.toLocaleDateString('en-GB', { weekday: 'long' });
-  const date = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
-  dateEl.innerHTML = `<span class="info-day">${day}</span><span class="info-full-date">${date}</span>`;
 
   messageEl.textContent = pickMessage();
 }

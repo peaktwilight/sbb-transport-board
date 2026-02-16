@@ -14,8 +14,8 @@ const departuresEl = $('departures-body');
 const statusEl = $('status');
 const tickerEl = $('ticker-track');
 const progressEl = $('screen-progress');
+const headerDateEl = $('header-date');
 const infoWeatherEl = $('info-weather');
-const infoDateEl = $('info-date');
 const infoMessageEl = $('info-message');
 
 let currentDepartures = [];
@@ -59,12 +59,12 @@ async function requestWakeLock() {
 }
 
 async function init() {
-  startClock(clockEl);
+  startClock(clockEl, headerDateEl);
   requestWakeLock();
   initScreens(progressEl, (screen) => {
-    if (screen === 'info') updateInfoScreen(infoWeatherEl, infoDateEl, infoMessageEl);
+    if (screen === 'info') updateInfoScreen(infoWeatherEl, infoMessageEl);
   });
-  updateInfoScreen(infoWeatherEl, infoDateEl, infoMessageEl);
+  updateInfoScreen(infoWeatherEl, infoMessageEl);
   buildTicker(tickerEl, null, null, []);
 
   updateStationboard();
@@ -72,7 +72,7 @@ async function init() {
 
   fetchWeather().then(() => {
     rebuildTicker();
-    updateInfoScreen(infoWeatherEl, infoDateEl, infoMessageEl);
+    updateInfoScreen(infoWeatherEl, infoMessageEl);
   });
 
   setInterval(updateStationboard, CONFIG.stationboardRefresh);

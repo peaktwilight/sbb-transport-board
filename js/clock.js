@@ -13,13 +13,21 @@ export function getCountdown(isoString) {
   return { mins, secs, totalSecs, text: `${mins}:${String(secs).padStart(2, '0')}` };
 }
 
-export function startClock(element) {
+export function startClock(element, dateElement) {
   const pad2 = (n) => String(n).padStart(2, '0');
   const pad3 = (n) => String(n).padStart(3, '0');
+  let lastDate = '';
   function update() {
     const now = new Date();
     element.textContent = `${pad2(now.getHours())}:${pad2(now.getMinutes())}:${pad2(now.getSeconds())}.${pad3(now.getMilliseconds())}`;
+    if (dateElement) {
+      const dateStr = now.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+      if (dateStr !== lastDate) {
+        dateElement.textContent = dateStr;
+        lastDate = dateStr;
+      }
+    }
   }
   update();
-  return setInterval(update, 37); // ~27fps for smooth ms ticking
+  return setInterval(update, 37);
 }
