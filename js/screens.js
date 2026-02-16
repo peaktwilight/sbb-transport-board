@@ -138,6 +138,7 @@ function onUserScroll() {
 }
 
 let bar = null;
+let cover = null;
 let animFrame = null;
 
 function easeOutCubic(t) {
@@ -149,15 +150,23 @@ function resetProgress() {
   cancelAnimationFrame(animFrame);
 
   if (!bar || !bar.parentElement) {
-    progressEl.innerHTML = '<div class="progress-bar"></div>';
+    progressEl.innerHTML = '<div class="progress-bar"></div><div class="progress-cover"></div>';
     bar = progressEl.querySelector('.progress-bar');
+    cover = progressEl.querySelector('.progress-cover');
   }
 
   const duration = getDuration();
-  const reverse = current === 1; // weather drains back down
+  const isDrain = current === 1; // weather: cover eats the bar
 
-  bar.classList.add('active');
-  bar.style.width = reverse ? '100%' : '0';
+  if (isDrain) {
+    // Bar stays full, cover grows over it
+    bar.style.width = '100%';
+    cover.style.width = '0';
+  } else {
+    // Reset both, bar fills fresh
+    bar.style.width = '0';
+    cover.style.width = '0';
+  }
 
   requestAnimationFrame(() => {
     const start = performance.now();
@@ -165,7 +174,13 @@ function resetProgress() {
     function tick(now) {
       const linear = Math.min((now - start) / duration, 1);
       const t = easeOutCubic(linear);
-      bar.style.width = reverse ? `${(1 - t) * 100}%` : `${t * 100}%`;
+
+      if (isDrain) {
+        cover.style.width = `${t * 100}%`;
+      } else {
+        bar.style.width = `${t * 100}%`;
+      }
+
       if (linear < 1) animFrame = requestAnimationFrame(tick);
     }
 
