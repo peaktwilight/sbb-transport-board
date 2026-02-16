@@ -407,6 +407,24 @@ body::after {
   animation: rowFadeIn 0.3s ease;
 }
 
+.connection-row--header {
+  font-size: 0.8rem;
+  color: var(--white-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 400;
+  padding: 0.5em 1.2em;
+  border-bottom: none;
+  animation: none;
+}
+
+.connection-row--header > div {
+  color: var(--white-dim);
+  text-shadow: none;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
 .conn-badge {
   min-width: 60px;
 }
