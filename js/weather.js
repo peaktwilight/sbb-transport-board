@@ -42,8 +42,10 @@ export async function fetchWeather(element) {
     const desc = WEATHER_DESC[currentWeatherCode] || 'Unknown';
 
     element.innerHTML = `
-      <span class="weather-temp">${currentTemp}°C</span>
-      <span class="weather-desc">${desc}</span>
+      <span class="weather-top">
+        <span class="weather-temp">${currentTemp}°C</span>
+        <span class="weather-desc">${desc}</span>
+      </span>
       <span class="weather-detail">Feels ${feelsLike}° · Wind ${wind} km/h</span>
     `;
   } catch (err) {
