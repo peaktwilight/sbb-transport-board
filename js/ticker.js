@@ -16,6 +16,9 @@ const MORNING = [
   'Step 1: leave bed. Step 2: everything else',
   'Quick reminder: you\'re awesome. Now go catch that tram',
   'The early bird catches the tram. The late bird walks',
+  'Shower thoughts are free but hot water isn\'t... be quick',
+  'Your bed misses you already. Stay strong',
+  'Today\'s forecast: 100% chance of being amazing',
 ];
 
 const AFTERNOON = [
@@ -30,6 +33,8 @@ const AFTERNOON = [
   'That post-lunch energy dip hits different',
   'Have you stretched today? Your back will thank you',
   'Fun fact: Balgrist literally means "bald ridge"',
+  'The Mensa food was mid today, wasn\'t it',
+  'Power nap window closing in 3... 2... 1...',
 ];
 
 const EVENING = [
@@ -45,6 +50,9 @@ const EVENING = [
   'Who\'s doing the dishes tonight? Not it',
   'Evening stroll along the lake? Just saying',
   'WG dinner hits different when everyone\'s home',
+  'The fridge is judging your leftovers',
+  'Whoever is cooking tonight... thank you in advance',
+  'Golden hour at the Zürichsee right now, just saying',
 ];
 
 const NIGHT = [
@@ -58,19 +66,69 @@ const NIGHT = [
   'Plot twist: going to bed early is actually amazing',
   'The last tram left a while ago... you\'re walking',
   'Tomorrow-you will be grateful if you sleep now',
+  'One more episode? That\'s what you said 3 episodes ago',
+  'The WiFi is still on but your brain should be off',
 ];
 
-const WEEKEND = [
-  'Happy weekend! No rush today',
-  'Weekend plans? The lake is always a good idea',
-  'Brunch time? Zurich has great spots',
-  'Perfect day for exploring the city',
-  'Relax mode: activated',
+const MONDAY = [
+  'It\'s Monday. We don\'t talk about Mondays',
+  'Monday motivation: only 4 days until Friday',
+  'Mondays are just Sunday\'s evil twin',
+  'New week, new chances to miss the tram',
+  'Monday called. Nobody picked up',
+];
+
+const TUESDAY = [
+  'Tuesday: Monday\'s less annoying sibling',
+  'Fun fact: nothing interesting has ever happened on a Tuesday',
+  'It\'s Tuesday, you\'re already surviving the week',
+];
+
+const WEDNESDAY = [
+  'It\'s Wednesday my dudes',
+  'Hump day! Downhill from here',
+  'Halfway through the week, keep pushing',
+  'Wednesday: close enough to the weekend to start dreaming',
+];
+
+const THURSDAY = [
+  'Thursday: Friday\'s opening act',
+  'Almost Friday... almost...',
+  'Thursday night plans? Langstrasse is calling',
+  'One more day. You can do this',
+];
+
+const FRIDAY = [
+  'It\'s Friday! You made it!',
+  'TGIF! What\'s the plan tonight?',
+  'Friday energy: unmatched',
+  'Weekend loading... 99%',
+  'Friday night at Witelli? Say less',
+  'The weekend starts NOW (almost)',
+];
+
+const SATURDAY = [
+  'Happy Saturday! No alarms, no stress',
   'Saturday cleaning day? Or pretend you didn\'t see this',
   'Weekend = socially acceptable to do nothing',
   'Üetliberg hike? Or is the couch calling louder?',
   'No lectures today, just vibes',
   'Farmers market at Bürkliplatz? Fresh bread hits different',
+  'Saturday brunch is not optional, it\'s a lifestyle',
+  'The lake is free. Go touch it',
+  'Flea market at Kanzlei? You never know what you\'ll find',
+];
+
+const SUNDAY = [
+  'Happy Sunday! Recharge day',
+  'Sunday scaries? Not at Witelli 20',
+  'Everything is closed and that\'s okay',
+  'Sunday cooking session? The kitchen is yours',
+  'Meal prep Sunday or order food? No judgment either way',
+  'Enjoy the quiet. Monday is coming',
+  'Sunday stroll through the old town? Always a vibe',
+  'Perfect day to do laundry. Or not. Your call',
+  'The only plans today should be no plans',
 ];
 
 const WEATHER_NICE = [
@@ -81,6 +139,8 @@ const WEATHER_NICE = [
   'Sunglasses weather today',
   'The Zürichsee is sparkling today, go see it',
   'Ice cream weather? Ice cream weather',
+  'Perfect day for the Letten or Oberer Letten',
+  'Vitamin D is free today. Go collect some',
 ];
 
 const WEATHER_COLD = [
@@ -91,6 +151,8 @@ const WEATHER_COLD = [
   'It\'s giving winter. Dress accordingly',
   'Your future self says: bring a scarf',
   'Cold hands, warm heart. Still bring gloves though',
+  'Glühwein season? Glühwein season',
+  'The tram shelter is your best friend today',
 ];
 
 const WEATHER_RAIN = [
@@ -101,6 +163,8 @@ const WEATHER_RAIN = [
   'Rain check on outdoor plans? Literally',
   'Pro tip: the tram shelter exists for a reason',
   'Wet socks are a vibe. A terrible, terrible vibe',
+  'Netflix and rain? Classic combo',
+  'The ducks at the lake are thriving though',
 ];
 
 const WEATHER_SNOW = [
@@ -109,6 +173,7 @@ const WEATHER_SNOW = [
   'Careful on the sidewalks today, it\'s slippery',
   'Snowball fight on the Witelli rooftop? Just a thought',
   'The world looks prettier in white, enjoy it',
+  'Uetliberg with snow? Magical. Go see it',
 ];
 
 const EASTER_EGGS = [
@@ -132,12 +197,30 @@ const EASTER_EGGS = [
   'Certified WG moment',
   'If this board could talk... actually it can, you\'re reading it',
   'Remember to call your mom',
-  'The meaning of life is 42. And catching the tram on time',
   'Friendly PSA: clean the kitchen. You know who you are',
   'WG rule #1: whoever finishes the milk buys new milk',
   'This is your sign to go outside',
   'The tram driver waved at you? You\'re the chosen one',
+  'Top secret info: you can ask Doruk for free laundry',
+  'The Witelli rooftop at sunset > everything',
+  'Someone left their stuff in the dryer again...',
+  'Reminder: the recycling doesn\'t take itself out',
+  'The WiFi password is on the fridge. You\'re welcome',
+  'WG meeting when? Check the group chat',
+  'Whoever bought oat milk, you\'re a real one',
+  'The bathroom is not a library. Be quick',
+  'Spaghetti again? Respect the hustle',
 ];
+
+const DAY_MESSAGES = {
+  1: MONDAY,
+  2: TUESDAY,
+  3: WEDNESDAY,
+  4: THURSDAY,
+  5: FRIDAY,
+  6: SATURDAY,
+  0: SUNDAY,
+};
 
 function getTimeOfDayMessages() {
   const hour = new Date().getHours();
@@ -145,6 +228,10 @@ function getTimeOfDayMessages() {
   if (hour >= 11 && hour < 17) return AFTERNOON;
   if (hour >= 17 && hour < 22) return EVENING;
   return NIGHT;
+}
+
+function getDayMessages() {
+  return DAY_MESSAGES[new Date().getDay()] || [];
 }
 
 function getWeatherMessages(weatherCode, temp) {
@@ -156,11 +243,6 @@ function getWeatherMessages(weatherCode, temp) {
   return [];
 }
 
-function isWeekend() {
-  const day = new Date().getDay();
-  return day === 0 || day === 6;
-}
-
 function pick(arr, n) {
   const shuffled = [...arr].sort(() => Math.random() - 0.5);
   return shuffled.slice(0, n);
@@ -170,12 +252,11 @@ export function buildTicker(element, weatherCode, temp) {
   const messages = [...ALWAYS];
 
   messages.push(...pick(getTimeOfDayMessages(), 3));
+  messages.push(...pick(getDayMessages(), 2));
   messages.push(...pick(EASTER_EGGS, 3));
 
   const weatherMsgs = getWeatherMessages(weatherCode, temp);
   if (weatherMsgs.length) messages.push(...pick(weatherMsgs, 2));
-
-  if (isWeekend()) messages.push(...pick(WEEKEND, 2));
 
   const selected = messages.sort(() => Math.random() - 0.5);
 
