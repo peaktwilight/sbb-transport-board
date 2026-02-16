@@ -68,10 +68,11 @@ function formatPrice(price) {
   return price.toLocaleString('de-CH', { minimumFractionDigits: 4, maximumFractionDigits: 4 });
 }
 
-function changeText(change) {
+function changeHtml(change) {
   if (change === null || change === undefined) return '';
+  const cls = change >= 0 ? 'ticker-up' : 'ticker-down';
   const arrow = change >= 0 ? '▲' : '▼';
-  return ` ${arrow}${Math.abs(change).toFixed(1)}%`;
+  return ` <span class="${cls}">${arrow}${Math.abs(change).toFixed(1)}%</span>`;
 }
 
 export async function fetchMarkets() {
@@ -98,7 +99,7 @@ export function getTickerItems() {
       const data = cachedCrypto[id];
       if (!data) continue;
       const info = CRYPTO_NAMES[id] || { symbol: id.toUpperCase() };
-      items.push(`${info.symbol} ${formatPrice(data.chf)} CHF${changeText(data.chf_24h_change)}`);
+      items.push(`${info.symbol} ${formatPrice(data.chf)} CHF${changeHtml(data.chf_24h_change)}`);
     }
   }
 
@@ -106,7 +107,7 @@ export function getTickerItems() {
     for (const symbol of CONFIG.markets.stocks) {
       const data = cachedStocks[symbol];
       if (!data) continue;
-      items.push(`${symbol} ${formatPrice(data.price)} ${data.currency}${changeText(data.change)}`);
+      items.push(`${symbol} ${formatPrice(data.price)} ${data.currency}${changeHtml(data.change)}`);
     }
   }
 

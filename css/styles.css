@@ -675,6 +675,14 @@ body::after {
   font-weight: 700;
 }
 
+.ticker-up {
+  color: var(--green-led);
+}
+
+.ticker-down {
+  color: var(--red-led);
+}
+
 .ticker-sep {
   color: var(--board-border);
   opacity: 0.5;
