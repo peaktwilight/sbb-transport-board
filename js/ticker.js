@@ -240,7 +240,7 @@ function pick(arr, n) {
   return shuffled.slice(0, n);
 }
 
-export function buildTicker(element, weatherCode, temp) {
+export function buildTicker(element, weatherCode, temp, marketItems = []) {
   const messages = [...ALWAYS];
 
   messages.push(...pick(getTimeOfDayMessages(), 2));
@@ -252,9 +252,22 @@ export function buildTicker(element, weatherCode, temp) {
 
   const selected = messages.sort(() => Math.random() - 0.5);
 
-  const html = selected
-    .map((msg) => `<span>${msg}</span><span class="ticker-sep">///</span>`)
-    .join('');
+  // Intersperse market items among messages
+  const combined = [];
+  let mi = 0;
+  for (const msg of selected) {
+    combined.push(`<span>${msg}</span><span class="ticker-sep">///</span>`);
+    if (mi < marketItems.length) {
+      combined.push(`<span class="ticker-market">${marketItems[mi]}</span><span class="ticker-sep">///</span>`);
+      mi++;
+    }
+  }
+  // Add remaining market items
+  while (mi < marketItems.length) {
+    combined.push(`<span class="ticker-market">${marketItems[mi]}</span><span class="ticker-sep">///</span>`);
+    mi++;
+  }
 
+  const html = combined.join('');
   element.innerHTML = html + html;
 }

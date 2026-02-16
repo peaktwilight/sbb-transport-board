@@ -138,6 +138,7 @@ const NIGHT_MSGS = [
   'The WiFi is still on but your brain should be off',
   'Fun fact: sleep is free. And you\'re not using it. Weird',
   'Your alarm clock is already dreading tomorrow',
+  'It\'s past midnight and you\'re looking at a departure board. Respect',
 ];
 
 // ---- Day of week ----
@@ -225,6 +226,11 @@ const EASTER_EGGS = [
   'Somewhere out there, a SBB conductor is checking tickets. Stay safe',
   'Your rent is due but your vibes are priceless',
   'The recycling doesn\'t take itself out. Looking at you',
+  'Whoever invented the Halbtax deserves a Nobel Prize',
+  'Lecture at 8am was a choice. A bad one, but a choice',
+  'I\'ve been running for hours straight. Where\'s MY coffee?',
+  'Whoever left dishes in the sink... the sink remembers',
+  'The shower drain is not going to unclog itself',
 ];
 
 // ---- Pool builder ----

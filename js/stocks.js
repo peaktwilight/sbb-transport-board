@@ -68,11 +68,10 @@ function formatPrice(price) {
   return price.toLocaleString('de-CH', { minimumFractionDigits: 4, maximumFractionDigits: 4 });
 }
 
-function changeHtml(change) {
+function changeText(change) {
   if (change === null || change === undefined) return '';
-  const cls = change >= 0 ? 'market-up' : 'market-down';
   const arrow = change >= 0 ? '▲' : '▼';
-  return `<span class="${cls}">${arrow} ${Math.abs(change).toFixed(1)}%</span>`;
+  return ` ${arrow}${Math.abs(change).toFixed(1)}%`;
 }
 
 export async function fetchMarkets() {
@@ -91,66 +90,31 @@ export async function fetchMarkets() {
   }
 }
 
-function renderRows(items) {
-  return items.map(({ symbol, name, price, currency, change }) => `
-    <div class="market-row">
-      <div class="market-symbol">${symbol}</div>
-      <div class="market-name led-text-dim">${name}</div>
-      <div class="market-price led-text">${formatPrice(price)} <span class="market-currency">${currency}</span></div>
-      <div class="market-change">${changeHtml(change)}</div>
-    </div>
-  `).join('');
-}
+export function getTickerItems() {
+  const items = [];
 
-export function renderMarkets(container) {
-  if (!cachedCrypto && !cachedStocks && !cachedForex) {
-    container.innerHTML = '<div class="connections-loading led-text-dim">Loading markets...</div>';
-    return;
-  }
-
-  let html = '<div class="markets-grid">';
-
-  // Crypto section
   if (cachedCrypto) {
-    html += '<div class="market-section-header led-text-white">Crypto</div>';
-    const rows = CONFIG.markets.crypto
-      .filter((id) => cachedCrypto[id])
-      .map((id) => {
-        const info = CRYPTO_NAMES[id] || { symbol: id.toUpperCase(), name: id };
-        const data = cachedCrypto[id];
-        return { symbol: info.symbol, name: info.name, price: data.chf, currency: 'CHF', change: data.chf_24h_change };
-      });
-    html += renderRows(rows);
+    for (const id of CONFIG.markets.crypto) {
+      const data = cachedCrypto[id];
+      if (!data) continue;
+      const info = CRYPTO_NAMES[id] || { symbol: id.toUpperCase() };
+      items.push(`${info.symbol} ${formatPrice(data.chf)} CHF${changeText(data.chf_24h_change)}`);
+    }
   }
 
-  // Stocks section
   if (cachedStocks) {
-    html += '<div class="market-section-header led-text-white">Stocks</div>';
-    const rows = CONFIG.markets.stocks
-      .filter((s) => cachedStocks[s])
-      .map((symbol) => {
-        const data = cachedStocks[symbol];
-        return { symbol, name: STOCK_NAMES[symbol] || symbol, price: data.price, currency: data.currency, change: data.change };
-      });
-    html += renderRows(rows);
+    for (const symbol of CONFIG.markets.stocks) {
+      const data = cachedStocks[symbol];
+      if (!data) continue;
+      items.push(`${symbol} ${formatPrice(data.price)} ${data.currency}${changeText(data.change)}`);
+    }
   }
 
-  // Forex section
   if (cachedForex && cachedForex.length) {
-    html += '<div class="market-section-header led-text-white">Forex</div>';
-    const rows = cachedForex.map((pair) => ({
-      symbol: pair.from, name: `${pair.from}/${pair.to}`, price: pair.rate, currency: pair.to, change: null,
-    }));
-    html += renderRows(rows);
+    for (const pair of cachedForex) {
+      items.push(`${pair.from}/${pair.to} ${pair.rate.toFixed(4)}`);
+    }
   }
 
-  // Timestamp
-  if (lastFetchTime) {
-    const age = Math.round((Date.now() - lastFetchTime) / 60_000);
-    const timeStr = age < 1 ? 'just now' : `${age} min ago`;
-    html += `<div class="market-updated led-text-dim">Updated ${timeStr}</div>`;
-  }
-
-  html += '</div>';
-  container.innerHTML = html;
+  return items;
 }

@@ -29,9 +29,7 @@
 
   <nav class="screen-tabs" id="screen-tabs">
     <button class="screen-tab screen-tab--active" data-target="0"><i class="ph-bold ph-train-simple"></i> Departures</button>
-    <button class="screen-tab" data-target="1"><i class="ph-bold ph-path"></i> Connections</button>
-    <button class="screen-tab" data-target="2"><i class="ph-bold ph-chart-line-up"></i> Markets</button>
-    <button class="screen-tab" data-target="3"><i class="ph-bold ph-cloud-sun"></i> Weather</button>
+    <button class="screen-tab" data-target="1"><i class="ph-bold ph-cloud-sun"></i> Weather</button>
     <div class="screen-progress" id="screen-progress"></div>
   </nav>
   <div class="screen-container">
@@ -48,28 +46,7 @@
       <div id="departures-body" class="screen-body"></div>
     </section>
 
-    <!-- Screen 2: Connections -->
-    <section class="screen" data-screen="connections">
-      <div class="screen-header">
-        <div class="connection-row connection-row--header">
-          <div>Line</div>
-          <div>Departs</div>
-          <div>In</div>
-          <div>Arrives</div>
-        </div>
-      </div>
-      <div id="connections-body" class="screen-body"></div>
-    </section>
-
-    <!-- Screen 3: Markets -->
-    <section class="screen" data-screen="markets">
-      <div class="screen-header">
-        <h2 class="screen-title led-text-white">Markets</h2>
-      </div>
-      <div id="markets-body" class="screen-body"></div>
-    </section>
-
-    <!-- Screen 4: Info -->
+    <!-- Screen 2: Weather -->
     <section class="screen" data-screen="info">
       <div class="info-screen">
         <div class="info-weather" id="info-weather"></div>

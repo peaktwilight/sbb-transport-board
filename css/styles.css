@@ -670,6 +670,11 @@ body::after {
   padding: 0 1.5em;
 }
 
+.ticker-market {
+  color: var(--white-led);
+  font-weight: 700;
+}
+
 .ticker-sep {
   color: var(--board-border);
   opacity: 0.5;
