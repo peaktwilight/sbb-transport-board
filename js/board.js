@@ -8,7 +8,7 @@ function cleanDestination(name) {
 function minuteClass(mins) {
   if (mins < 1) return 'minutes--imminent';
   if (mins <= 3) return 'minutes--soon';
-  if (mins <= CONFIG.walkingTime + 2) return 'minutes--go';
+  if (mins <= CONFIG.walkingTime + 1) return 'minutes--go';
   return '';
 }
 
@@ -29,7 +29,7 @@ export function renderStationboard(departures, container) {
     const style = badgeStyle(dep.category, dep.number);
     const delayHtml = dep.stop.delay > 0
       ? `<span class="delay-indicator">+${dep.stop.delay}</span>` : '';
-    const isGo = countdown.mins > 3 && countdown.mins <= CONFIG.walkingTime + 2;
+    const isGo = countdown.mins > 3 && countdown.mins <= CONFIG.walkingTime + 1;
 
     const row = document.createElement('div');
     row.className = `departure-row${isGo ? ' departure-row--go' : ''}`;
@@ -59,6 +59,6 @@ export function updateCountdowns(departures, container) {
       el.textContent = countdown.text;
       el.className = `departure-minutes led-text ${minuteClass(countdown.mins)}`;
     }
-    row.classList.toggle('departure-row--go', countdown.mins > 3 && countdown.mins <= CONFIG.walkingTime + 2);
+    row.classList.toggle('departure-row--go', countdown.mins > 3 && countdown.mins <= CONFIG.walkingTime + 1);
   });
 }
