@@ -676,7 +676,7 @@ body::after {
 }
 
 .birthday-icon {
-  font-size: 5rem;
+  font-size: 3rem;
   color: var(--amber);
   text-shadow: var(--glow-amber);
 }
@@ -686,7 +686,7 @@ body::after {
 }
 
 .birthday-label {
-  font-size: 3.5rem;
+  font-size: 2rem;
   font-weight: 800;
   text-shadow: 0 0 10px rgba(255, 179, 0, 0.6), 0 0 30px rgba(255, 179, 0, 0.2);
   letter-spacing: 0.15em;
@@ -695,28 +695,18 @@ body::after {
 
 .birthday-name {
   font-family: 'Doto', monospace;
-  font-size: 5rem;
+  font-size: 2.5rem;
   font-weight: 800;
   color: var(--white-led);
   text-shadow: 0 0 12px rgba(255, 255, 255, 0.5), 0 0 40px rgba(255, 255, 255, 0.15);
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  animation: name-glow 2s ease-in-out infinite;
   margin-top: 0.1em;
-}
-
-@keyframes name-glow {
-  0%, 100% {
-    text-shadow: 0 0 12px rgba(255, 255, 255, 0.5), 0 0 40px rgba(255, 255, 255, 0.15);
-  }
-  50% {
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.7), 0 0 60px rgba(255, 255, 255, 0.3), 0 0 80px rgba(255, 179, 0, 0.15);
-  }
 }
 
 .birthday-subtitle {
   font-family: 'Share Tech Mono', monospace;
-  font-size: 1.2rem;
+  font-size: 0.95rem;
   color: var(--amber-dim);
   max-width: 80%;
   text-align: center;
@@ -777,10 +767,10 @@ body::after {
 }
 
 @media (max-width: 768px) {
-  .birthday-label { font-size: 2.2rem; }
-  .birthday-name { font-size: 3rem; }
-  .birthday-icon { font-size: 3.5rem; }
-  .birthday-subtitle { font-size: 1rem; }
+  .birthday-label { font-size: 1.5rem; }
+  .birthday-name { font-size: 2rem; }
+  .birthday-icon { font-size: 2.5rem; }
+  .birthday-subtitle { font-size: 0.85rem; }
 }
 
 /* ---- Portrait / small screens ---- */
