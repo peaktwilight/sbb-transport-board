@@ -67,14 +67,18 @@ function showBirthdayHeader() {
   headerDayEl.textContent = 'Happy Birthday';
   headerDayEl.classList.remove('led-text-dim');
   headerDayEl.classList.add('led-text');
+  headerDayEl.style.fontSize = '0.9rem';
   headerDateEl.textContent = '';
   const stationEl = document.querySelector('.station-name');
   if (stationEl) {
     stationEl.textContent = names;
     stationEl.classList.remove('led-text-white');
     stationEl.classList.add('led-text');
-    stationEl.style.textShadow = '0 0 12px rgba(255,255,255,0.5), 0 0 40px rgba(255,255,255,0.15)';
+    stationEl.style.fontSize = '1.2rem';
   }
+  // Hide news column headers on birthday
+  const newsHeader = document.querySelector('[data-screen="news"] .screen-header');
+  if (newsHeader) newsHeader.style.display = 'none';
 }
 
 async function requestWakeLock() {
