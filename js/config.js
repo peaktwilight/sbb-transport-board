@@ -89,6 +89,16 @@ export const CONFIG = {
     { name: 'Anna', month: 12, day: 10 },
   ],
 
+  // Kitchen shaming
+  kitchen: {
+    wahaUrl: 'https://waha.doruk.ch',
+    wahaApiKey: '***REDACTED***',
+    wahaSession: 'default',
+    groupId: '', // TODO: fill in WG group ID (e.g. '120363xxxxx@g.us')
+    cooldown: 30_000, // 30s cooldown between shames
+    sides: ['13er', '9er'],
+  },
+
   // ZVV per-line colors (override category default)
   lineColors: {
     T2: '#DC143C',

@@ -9,6 +9,7 @@ import { updateInfoScreen } from './info.js';
 import { fetchMarkets, getTickerItems } from './stocks.js';
 import { fetchNews, renderNewsScreen } from './news.js';
 import { getTodaysBirthdays, renderBirthdayNews, renderUpcomingBirthdays } from './birthday.js';
+import { initKitchenShame } from './kitchen.js';
 
 const $ = (id) => document.getElementById(id);
 const clockEl = $('clock');
@@ -98,6 +99,7 @@ async function requestWakeLock() {
 async function init() {
   startClock(clockEl, headerDayEl, headerDateEl);
   requestWakeLock();
+  initKitchenShame();
 
   if (todayBirthdays.length) showBirthdayHeader();
 

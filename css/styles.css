@@ -598,6 +598,118 @@ body::after {
   100% { transform: translateX(-50%); }
 }
 
+/* ---- Kitchen shame ---- */
+
+.kitchen-shame-wrapper {
+  position: relative;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.kitchen-shame-btn {
+  background: var(--board-surface);
+  border: none;
+  border-left: 1px solid var(--board-border);
+  color: var(--red-led);
+  font-size: 1rem;
+  padding: 0.4em 0.8em;
+  cursor: pointer;
+  height: 100%;
+  transition: background 0.2s;
+}
+
+.kitchen-shame-btn:hover {
+  background: rgba(255, 26, 26, 0.1);
+}
+
+.kitchen-panel {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 4px);
+  right: 0;
+  background: var(--board-surface);
+  border: 1px solid var(--board-border);
+  border-radius: 6px;
+  padding: 1em;
+  min-width: 220px;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.kitchen-panel--open {
+  display: block;
+}
+
+.kitchen-panel-title {
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--red-led);
+  text-shadow: var(--glow-red);
+  margin-bottom: 0.2em;
+}
+
+.kitchen-panel-subtitle {
+  font-size: 0.75rem;
+  margin-bottom: 0.8em;
+}
+
+.kitchen-sides {
+  display: flex;
+  gap: 0.5em;
+}
+
+.kitchen-side-btn {
+  flex: 1;
+  padding: 0.6em 1em;
+  background: rgba(255, 26, 26, 0.1);
+  border: 1px solid rgba(255, 26, 26, 0.3);
+  border-radius: 4px;
+  color: var(--red-led);
+  font-family: 'Doto', monospace;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.kitchen-side-btn:hover {
+  background: rgba(255, 26, 26, 0.25);
+}
+
+.kitchen-side-btn:active {
+  background: rgba(255, 26, 26, 0.4);
+}
+
+.kitchen-status {
+  margin-top: 0.6em;
+  font-size: 0.75rem;
+  text-align: center;
+  min-height: 1.2em;
+}
+
+.kitchen-status--sending {
+  color: var(--amber);
+}
+
+.kitchen-status--success {
+  color: var(--green-led);
+  text-shadow: 0 0 6px rgba(0, 204, 68, 0.4);
+}
+
+.kitchen-status--cooldown {
+  color: var(--amber-dim);
+}
+
+.kitchen-status--warn {
+  color: var(--amber);
+  text-shadow: var(--glow-amber);
+}
+
+.kitchen-status--error {
+  color: var(--red-led);
+  text-shadow: var(--glow-red);
+}
+
 /* ---- News screen ---- */
 
 .news-row {
