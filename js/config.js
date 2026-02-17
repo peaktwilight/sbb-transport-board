@@ -92,9 +92,7 @@ export const CONFIG = {
   // Kitchen shaming
   kitchen: {
     wahaUrl: 'https://waha.doruk.ch',
-    wahaApiKey: '***REDACTED***',
     wahaSession: 'default',
-    groupId: '', // TODO: fill in WG group ID (e.g. '120363xxxxx@g.us')
     cooldown: 30_000, // 30s cooldown between shames
     sides: ['13er', '9er'],
   },

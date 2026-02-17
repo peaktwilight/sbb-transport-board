@@ -1,4 +1,5 @@
 import { CONFIG } from './config.js';
+import { SECRETS } from './secrets.js';
 
 const SHAME_MESSAGES = [
   (side) => `KITCHEN SHAME ALERT: The ${side} side kitchen is a disaster zone. Clean up, people.`,
@@ -32,7 +33,8 @@ function playAudio() {
 }
 
 async function sendWhatsApp(message) {
-  const { wahaUrl, wahaApiKey, wahaSession, groupId } = CONFIG.kitchen;
+  const { wahaUrl, wahaSession } = CONFIG.kitchen;
+  const { wahaApiKey, wahaGroupId: groupId } = SECRETS;
   if (!groupId) {
     console.warn('Kitchen shame: no WhatsApp group ID configured');
     return false;
@@ -58,7 +60,8 @@ async function sendWhatsApp(message) {
 }
 
 async function sendAudioWhatsApp() {
-  const { wahaUrl, wahaApiKey, wahaSession, groupId } = CONFIG.kitchen;
+  const { wahaUrl, wahaSession } = CONFIG.kitchen;
+  const { wahaApiKey, wahaGroupId: groupId } = SECRETS;
   if (!groupId) return false;
   try {
     // Send audio file as voice message
@@ -134,7 +137,7 @@ async function triggerShame(side, statusEl, panel) {
   if (textOk) {
     statusEl.textContent = 'Shame sent!';
     statusEl.className = 'kitchen-status kitchen-status--success';
-  } else if (!CONFIG.kitchen.groupId) {
+  } else if (!SECRETS.wahaGroupId) {
     statusEl.textContent = 'Audio only (no group ID)';
     statusEl.className = 'kitchen-status kitchen-status--warn';
   } else {
