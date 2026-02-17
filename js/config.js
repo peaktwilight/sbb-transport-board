@@ -93,7 +93,7 @@ export const CONFIG = {
   // Kitchen shaming
   kitchen: {
     wahaSession: 'default',
-    groupId: '41774703094-1427126373@g.us', // The Hacker Chat (test group)
+    groupId: '41786737283-1415046441@g.us', // WG 3. Stock ft. the Traitors
     cooldown: 30_000, // 30s cooldown between shames
     sides: ['13er', '9er'],
   },
