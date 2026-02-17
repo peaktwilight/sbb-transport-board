@@ -675,39 +675,10 @@ body::after {
   gap: 1em;
 }
 
-.cake-art {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 1.2rem;
-  line-height: 1.3;
-  text-align: center;
+.birthday-icon {
+  font-size: 5rem;
   color: var(--amber);
   text-shadow: var(--glow-amber);
-}
-
-.cake-flame {
-  color: var(--amber-glow);
-  text-shadow: 0 0 8px rgba(255, 204, 0, 0.8), 0 0 20px rgba(255, 179, 0, 0.4);
-  animation: flame-flicker 0.4s ease-in-out infinite alternate;
-}
-
-.cake-candle {
-  color: var(--white-led);
-  text-shadow: var(--glow-white);
-}
-
-.cake-tier {
-  color: var(--amber);
-  text-shadow: var(--glow-amber);
-}
-
-.cake-tier2 {
-  color: var(--amber-dim);
-  text-shadow: 0 0 6px rgba(179, 125, 0, 0.4);
-}
-
-@keyframes flame-flicker {
-  0% { opacity: 0.7; transform: translateY(0); }
-  100% { opacity: 1; transform: translateY(-1px); }
 }
 
 .birthday-greeting {
@@ -808,7 +779,7 @@ body::after {
 @media (max-width: 768px) {
   .birthday-label { font-size: 2.2rem; }
   .birthday-name { font-size: 3rem; }
-  .cake-art { font-size: 0.9rem; }
+  .birthday-icon { font-size: 3.5rem; }
   .birthday-subtitle { font-size: 1rem; }
 }
 

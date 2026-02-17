@@ -1,17 +1,6 @@
 import { CONFIG } from './config.js';
 
-const ASCII_CAKE = `<pre class="cake-art">
-<span class="cake-flame">    )  )  )    </span>
-<span class="cake-flame">   (  (  (     </span>
-<span class="cake-candle">    |  |  |    </span>
-<span class="cake-tier"> .___|__|__|___.</span>
-<span class="cake-tier"> |~~~~~~~~~~~~~|</span>
-<span class="cake-tier"> |  * * * * *  |</span>
-<span class="cake-tier"> |_____________|</span>
-<span class="cake-tier2">\\~~~~~~~~~~~~~~~~~/ </span>
-<span class="cake-tier2"> |  * * * * * *  |</span>
-<span class="cake-tier2"> |_______________|</span>
-</pre>`;
+const CAKE_ICON = '<i class="ph-bold ph-cake birthday-icon"></i>';
 
 const BIRTHDAY_TICKER = [
   (n) => `HAPPY BIRTHDAY ${n.toUpperCase()}!!! The whole WG is celebrating`,
@@ -80,7 +69,7 @@ export function renderBirthdayNews(container, birthdays) {
   container.innerHTML = `
     <div class="birthday-screen">
       <div class="birthday-content">
-        <div class="birthday-cake">${ASCII_CAKE}</div>
+        <div class="birthday-cake">${CAKE_ICON}</div>
         <div class="birthday-greeting">
           <div class="birthday-label led-text">HAPPY BIRTHDAY</div>
           <div class="birthday-name">${names}</div>
