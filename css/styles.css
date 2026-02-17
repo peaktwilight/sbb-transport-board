@@ -298,6 +298,13 @@ body::after {
 
 .departure-row--go {
   border-left-color: var(--green-led);
+  background: rgba(0, 204, 68, 0.04);
+}
+
+.departure-row--go .departure-minutes::after {
+  content: ' GO';
+  font-size: 0.7em;
+  letter-spacing: 0.1em;
 }
 
 /* Staggered entrance — departures */
@@ -416,7 +423,8 @@ body::after {
 
 .minutes--go {
   color: var(--green-led) !important;
-  text-shadow: 0 0 6px rgba(0, 204, 68, 0.4) !important;
+  text-shadow: 0 0 8px rgba(0, 204, 68, 0.5), 0 0 20px rgba(0, 204, 68, 0.2) !important;
+  font-weight: 800;
 }
 
 @keyframes pulse {
