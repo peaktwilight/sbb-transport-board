@@ -284,7 +284,7 @@ body::after {
 
 .departure-row {
   display: grid;
-  grid-template-columns: 110px 1fr 100px 80px;
+  grid-template-columns: 110px 1fr 100px auto;
   align-items: center;
   padding: 0.6em 1.2em;
   border-bottom: 1px solid rgba(255, 179, 0, 0.06);
@@ -362,6 +362,7 @@ body::after {
   text-align: right;
   font-size: 1.3rem;
   font-weight: 800;
+  white-space: nowrap;
 }
 
 /* ---- Line badges ---- */
