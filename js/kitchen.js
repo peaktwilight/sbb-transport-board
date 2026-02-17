@@ -1,5 +1,4 @@
 import { CONFIG } from './config.js';
-import { SECRETS } from './secrets.js';
 
 const SHAME_MESSAGES = [
   (side) => `KITCHEN SHAME ALERT: The ${side} side kitchen is a disaster zone. Clean up, people.`,
@@ -33,19 +32,15 @@ function playAudio() {
 }
 
 async function sendWhatsApp(message) {
-  const { wahaUrl, wahaSession } = CONFIG.kitchen;
-  const { wahaApiKey, wahaGroupId: groupId } = SECRETS;
+  const { wahaSession, groupId } = CONFIG.kitchen;
   if (!groupId) {
     console.warn('Kitchen shame: no WhatsApp group ID configured');
     return false;
   }
   try {
-    const res = await fetch(`${wahaUrl}/api/sendText`, {
+    const res = await fetch('/api/kitchen/sendText', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Api-Key': wahaApiKey,
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         session: wahaSession,
         chatId: groupId,
@@ -60,18 +55,13 @@ async function sendWhatsApp(message) {
 }
 
 async function sendAudioWhatsApp() {
-  const { wahaUrl, wahaSession } = CONFIG.kitchen;
-  const { wahaApiKey, wahaGroupId: groupId } = SECRETS;
+  const { wahaSession, groupId } = CONFIG.kitchen;
   if (!groupId) return false;
   try {
-    // Send audio file as voice message
     const audioUrl = `${location.origin}/audio/kitchen-shame.mp3`;
-    const res = await fetch(`${wahaUrl}/api/sendFile`, {
+    const res = await fetch('/api/kitchen/sendFile', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Api-Key': wahaApiKey,
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         session: wahaSession,
         chatId: groupId,
@@ -95,7 +85,6 @@ export function initKitchenShame() {
     panel.classList.toggle('kitchen-panel--open');
   });
 
-  // Close panel when clicking outside
   document.addEventListener('click', (e) => {
     if (!panel.contains(e.target) && !btn.contains(e.target)) {
       panel.classList.remove('kitchen-panel--open');
@@ -124,12 +113,10 @@ async function triggerShame(side, statusEl, panel) {
   statusEl.textContent = 'Shaming...';
   statusEl.className = 'kitchen-status kitchen-status--sending';
 
-  // Play audio locally
   playAudio();
 
-  // Send WhatsApp message + audio
   const message = getShameMessage(side);
-  const [textOk, audioOk] = await Promise.all([
+  const [textOk] = await Promise.all([
     sendWhatsApp(message),
     sendAudioWhatsApp(),
   ]);
@@ -137,7 +124,7 @@ async function triggerShame(side, statusEl, panel) {
   if (textOk) {
     statusEl.textContent = 'Shame sent!';
     statusEl.className = 'kitchen-status kitchen-status--success';
-  } else if (!SECRETS.wahaGroupId) {
+  } else if (!CONFIG.kitchen.groupId) {
     statusEl.textContent = 'Audio only (no group ID)';
     statusEl.className = 'kitchen-status kitchen-status--warn';
   } else {

@@ -1,0 +1,22 @@
+server {
+    listen 80;
+    root /usr/share/nginx/html;
+    index index.html;
+
+    # Block access to secrets and config files
+    location ~* (secrets\.js|\.env|\.git) {
+        return 404;
+    }
+
+    # Proxy kitchen shame API to WAHA
+    location /api/kitchen/ {
+        proxy_pass https://waha.doruk.ch/api/;
+        proxy_set_header Content-Type application/json;
+        proxy_set_header X-Api-Key ${WAHA_API_KEY};
+        proxy_ssl_server_name on;
+    }
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}
