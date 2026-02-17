@@ -401,12 +401,18 @@ body::after {
 
 /* ---- Delay indicator ---- */
 
+.departure-time {
+  position: relative;
+}
+
 .delay-indicator {
+  position: absolute;
+  top: -0.4em;
+  right: -0.2em;
   color: var(--red-led);
-  font-size: 0.75em;
-  margin-left: 0.4em;
+  font-size: 0.6em;
   text-shadow: var(--glow-red);
-  font-weight: 700;
+  font-weight: 800;
 }
 
 /* ---- Minutes urgency ---- */
