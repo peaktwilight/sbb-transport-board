@@ -93,7 +93,7 @@ export const CONFIG = {
   // Kitchen shaming
   kitchen: {
     wahaSession: 'default',
-    groupId: '', // WhatsApp group ID (e.g. '120363xxxxx@g.us')
+    groupId: '41774703094-1427126373@g.us', // The Hacker Chat (test group)
     cooldown: 30_000, // 30s cooldown between shames
     sides: ['13er', '9er'],
   },
