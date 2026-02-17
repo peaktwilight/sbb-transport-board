@@ -80,6 +80,7 @@ export const CONFIG = {
     { name: 'Jingyang', month: 6, day: 22 },
     { name: 'Yitong', month: 6, day: 26 },
     { name: 'Doruk', month: 7, day: 10 },
+    { name: 'César', month: 7, day: 23 },
     { name: 'Sienna', month: 7, day: 27 },
     { name: 'Juan', month: 8, day: 11 },
     { name: 'Toheeb', month: 10, day: 4 },
