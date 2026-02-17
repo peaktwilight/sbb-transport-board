@@ -8,7 +8,7 @@ import { initScreens } from './screens.js';
 import { updateInfoScreen } from './info.js';
 import { fetchMarkets, getTickerItems } from './stocks.js';
 import { fetchNews, renderNewsScreen } from './news.js';
-import { getTodaysBirthdays, renderBirthdayNews, onNewsScreenLeave, renderUpcomingBirthdays } from './birthday.js';
+import { getTodaysBirthdays, renderBirthdayNews, renderUpcomingBirthdays } from './birthday.js';
 
 const $ = (id) => document.getElementById(id);
 const clockEl = $('clock');
@@ -73,7 +73,7 @@ function showBirthdayHeader() {
     stationEl.textContent = names;
     stationEl.classList.remove('led-text-white');
     stationEl.classList.add('led-text');
-    stationEl.style.animation = 'name-glow 2s ease-in-out infinite';
+    stationEl.style.textShadow = '0 0 12px rgba(255,255,255,0.5), 0 0 40px rgba(255,255,255,0.15)';
   }
 }
 
@@ -96,7 +96,6 @@ async function init() {
   initScreens(progressEl, (screen) => {
     if (screen === 'info') updateInfoScreen(infoWeatherEl, infoMessageEl);
     if (screen === 'news') showNewsOrBirthday();
-    if (screen !== 'news') onNewsScreenLeave();
   });
   updateInfoScreen(infoWeatherEl, infoMessageEl);
   buildTicker(tickerEl, null, null, []);

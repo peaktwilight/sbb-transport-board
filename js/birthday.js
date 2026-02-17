@@ -72,39 +72,13 @@ function getDaysUntil(from, month, day) {
   return Math.round((target - today) / 86_400_000);
 }
 
-let sparkleInterval = null;
-
-function startSparkles(container) {
-  stopSparkles();
-  sparkleInterval = setInterval(() => {
-    const spark = document.createElement('div');
-    spark.className = 'birthday-spark';
-    spark.style.left = `${Math.random() * 100}%`;
-    const size = 2 + Math.random() * 4;
-    spark.style.width = `${size}px`;
-    spark.style.height = `${size}px`;
-    spark.style.animationDuration = `${1.5 + Math.random() * 2}s`;
-    container.appendChild(spark);
-    setTimeout(() => spark.remove(), 4000);
-  }, 120);
-}
-
-function stopSparkles() {
-  if (sparkleInterval) {
-    clearInterval(sparkleInterval);
-    sparkleInterval = null;
-  }
-}
-
 // Renders birthday celebration into the news screen body (replaces news)
 export function renderBirthdayNews(container, birthdays) {
-  stopSparkles();
   const names = birthdays.map((b) => b.name).join(' & ');
   const subtitle = SUBTITLES[Math.floor(Math.random() * SUBTITLES.length)](names);
 
   container.innerHTML = `
     <div class="birthday-screen">
-      <div class="birthday-sparkles"></div>
       <div class="birthday-content">
         <div class="birthday-cake">${ASCII_CAKE}</div>
         <div class="birthday-greeting">
@@ -115,14 +89,6 @@ export function renderBirthdayNews(container, birthdays) {
       </div>
     </div>
   `;
-
-  const sparklesEl = container.querySelector('.birthday-sparkles');
-  if (sparklesEl) startSparkles(sparklesEl);
-}
-
-// Stops sparkles when leaving the news screen
-export function onNewsScreenLeave() {
-  stopSparkles();
 }
 
 // Renders upcoming birthdays list for the news screen body (appended after news)
