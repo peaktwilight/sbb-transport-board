@@ -18,9 +18,11 @@ const SHAME_MESSAGES = [
 let audio = null;
 let lastShameTime = 0;
 
+const PREFIX = '[ANONYMOUS TABLET DASHBOARD MESSAGE BOT]';
+
 function getShameMessage(side) {
   const msg = SHAME_MESSAGES[Math.floor(Math.random() * SHAME_MESSAGES.length)];
-  return msg(side);
+  return `${PREFIX}\n\n${msg(side)}`;
 }
 
 function playAudio() {
