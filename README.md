@@ -6,16 +6,18 @@ A real-time public transport departure board for **Balgrist** tram stop in Zuric
 
 ## What it does
 
-- **Live departures** from Balgrist with real-time countdown, delay indicators, and a "leave now" green zone (3-7 min)
+- **Live departures** from Balgrist with real-time countdown, delay indicators, and a "GO NOW" green zone (3-6 min) for city-bound trams only
 - **Weather screen** with current conditions, feels-like temp, wind, and rotating context-aware messages
-- **Market ticker** at the bottom scrolling crypto (BTC, ETH, SOL, DOGE), stocks (NVDA, AAPL, GOOGL), and forex (USD/CHF, EUR/CHF) with green/red change indicators
+- **News screen** with live RSS headlines from 13+ sources (Swissinfo, SRF, Guardian, Reuters, Hacker News, TechCrunch, and more) sorted by time with colored source badges
+- **Birthday celebrations** — on someone's birthday: header takeover, birthday screen replaces news, and birthday messages in the ticker. On normal days: upcoming birthdays list in the news tab
+- **Market ticker** at the bottom scrolling crypto (BTC, ETH, SOL, DOGE) and forex (USD/CHF, EUR/CHF) with green/red change indicators
 - **Millisecond clock** because why not
 - **Per-line ZVV colors** for all Zurich tram lines (Tram 4 = dark blue, Tram 8 = magenta, etc.)
 - **Phosphor Icons** for transport types (tram, bus, S-Bahn, train)
 
 ## Screenshots
 
-The board rotates between a departures view and a weather/message view, with clickable tabs to switch manually.
+The board rotates between departures, weather, and news screens, with clickable tabs to switch manually.
 
 ## How it works
 
@@ -27,13 +29,13 @@ Plain HTML/CSS/JS with ES modules. No frameworks, no build step, no dependencies
 |-----|----------|---------|
 | [transport.opendata.ch](https://transport.opendata.ch) | Departures from Balgrist | Every 45s |
 | [Open-Meteo](https://open-meteo.com) | Weather for Zurich | Every 10 min |
+| [rss2json](https://rss2json.com) | RSS-to-JSON proxy for news feeds | Every 10 min |
 | [CoinGecko](https://www.coingecko.com/en/api) | Crypto prices in CHF | Every 5 min |
-| [Yahoo Finance](https://finance.yahoo.com) | Stock prices | Every 5 min |
 | [Frankfurter](https://www.frankfurter.app) | Forex rates | Every 5 min |
 
 ### Rate limits
 
-The transport API has a daily limit of ~1,000 connection searches and ~10,000 stationboard requests. The board uses localStorage caching and retry with exponential backoff to stay well within limits.
+The transport API has a daily limit of ~10,000 stationboard requests. RSS feeds are staggered (300ms between each) to avoid rss2json rate limits. The board uses retry with exponential backoff to handle transient errors.
 
 ## Setup
 
@@ -52,7 +54,7 @@ python3 -m http.server 8080
 
 The board is optimized for a tablet running in fullscreen:
 
-- `apple-mobile-web-app-capable` for iOS fullscreen
+- `mobile-web-app-capable` for fullscreen
 - Wake Lock API to prevent screen dimming
 - Auto page reload every 6 hours (memory safety)
 - Portrait fallback with responsive layout
@@ -69,12 +71,14 @@ docker run -p 8080:8080 sbb-board
 Everything is in `js/config.js`:
 
 ```js
-station: 'Balgrist',           // Your stop
-destinations: [...],            // Connection destinations
-walkingTime: 4,                 // Minutes to walk to stop
-screenInterval: 12_000,         // Screen rotation speed (ms)
-markets: { crypto: [...], ... } // Ticker symbols
-lineColors: { T4: '#21468B' }   // Per-line badge colors
+station: 'Balgrist',              // Your stop
+excludeDestinations: ['Rehalp'],  // Filter out directions
+markets: { crypto: [...], ... }   // Ticker symbols
+lineColors: { T4: '#21468B' }     // Per-line badge colors
+news: { feeds: [...] }            // RSS feed sources
+birthdays: [                      // WG member birthdays
+  { name: 'Fabi', month: 2, day: 17 },
+]
 ```
 
 ### Messages
@@ -83,9 +87,10 @@ The board shows context-aware messages based on:
 - **Time of day** (morning, afternoon, evening, night)
 - **Day of week** (Monday blues, Friday vibes, etc.)
 - **Weather** (rain, snow, fog, hot, freezing, overcast)
-- **Easter eggs** and adapted quotes
+- **Birthdays** (fun WG-themed messages when it's someone's birthday)
+- **Easter eggs** and WG inside jokes
 
-All messages are in `js/info.js` and `js/ticker.js`.
+All messages are in `js/info.js`, `js/ticker.js`, and `js/birthday.js`.
 
 ## Project structure
 
@@ -96,13 +101,15 @@ js/
   config.js         -- All configuration in one place
   app.js            -- Init and orchestration
   clock.js          -- Millisecond clock and countdown utils
-  board.js          -- Departure row rendering
+  board.js          -- Departure row rendering with go-zone
   weather.js        -- Open-Meteo weather fetching
   info.js           -- Weather screen messages and rendering
   ticker.js         -- Bottom ticker bar with messages
-  stocks.js         -- Market data (crypto, stocks, forex)
+  stocks.js         -- Market data (crypto, forex)
+  news.js           -- RSS news feed fetching and rendering
+  birthday.js       -- Birthday detection, celebration, and upcoming list
   screens.js        -- Screen rotation and auto-scroll
-  api.js            -- Transport API with caching and retry
+  api.js            -- Transport API with retry
 favicon.svg         -- Amber tram icon
 ```
 
