@@ -8,6 +8,7 @@ import { initScreens } from './screens.js';
 import { updateInfoScreen } from './info.js';
 import { fetchMarkets, getTickerItems } from './stocks.js';
 import { fetchNews, renderNewsScreen } from './news.js';
+import { getTodaysBirthdays, renderBirthdayNews, onNewsScreenLeave, renderUpcomingBirthdays } from './birthday.js';
 
 const $ = (id) => document.getElementById(id);
 const clockEl = $('clock');
@@ -23,6 +24,7 @@ const newsBodyEl = $('news-body');
 
 let currentDepartures = [];
 let lastSuccessTime = Date.now();
+const todayBirthdays = getTodaysBirthdays();
 
 async function updateStationboard() {
   try {
@@ -51,6 +53,30 @@ function rebuildTicker() {
   buildTicker(tickerEl, currentWeatherCode, currentTemp, getTickerItems());
 }
 
+function showNewsOrBirthday() {
+  if (todayBirthdays.length) {
+    renderBirthdayNews(newsBodyEl, todayBirthdays);
+  } else {
+    renderNewsScreen(newsBodyEl);
+    renderUpcomingBirthdays(newsBodyEl);
+  }
+}
+
+function showBirthdayHeader() {
+  const names = todayBirthdays.map((b) => b.name).join(' & ');
+  headerDayEl.textContent = 'Happy Birthday';
+  headerDayEl.classList.remove('led-text-dim');
+  headerDayEl.classList.add('led-text');
+  headerDateEl.textContent = '';
+  const stationEl = document.querySelector('.station-name');
+  if (stationEl) {
+    stationEl.textContent = names;
+    stationEl.classList.remove('led-text-white');
+    stationEl.classList.add('led-text');
+    stationEl.style.animation = 'name-glow 2s ease-in-out infinite';
+  }
+}
+
 async function requestWakeLock() {
   if (!('wakeLock' in navigator)) return;
   try {
@@ -64,16 +90,20 @@ async function requestWakeLock() {
 async function init() {
   startClock(clockEl, headerDayEl, headerDateEl);
   requestWakeLock();
+
+  if (todayBirthdays.length) showBirthdayHeader();
+
   initScreens(progressEl, (screen) => {
     if (screen === 'info') updateInfoScreen(infoWeatherEl, infoMessageEl);
-    if (screen === 'news') renderNewsScreen(newsBodyEl);
+    if (screen === 'news') showNewsOrBirthday();
+    if (screen !== 'news') onNewsScreenLeave();
   });
   updateInfoScreen(infoWeatherEl, infoMessageEl);
   buildTicker(tickerEl, null, null, []);
 
   updateStationboard();
   fetchMarkets().then(rebuildTicker);
-  fetchNews().then(() => renderNewsScreen(newsBodyEl));
+  fetchNews().then(showNewsOrBirthday);
 
   fetchWeather().then(() => {
     rebuildTicker();
@@ -84,7 +114,7 @@ async function init() {
   setInterval(tick, CONFIG.clockRefresh);
   setInterval(() => fetchWeather(), CONFIG.weatherRefresh);
   setInterval(() => fetchMarkets().then(rebuildTicker), CONFIG.markets.refreshInterval);
-  setInterval(() => fetchNews().then(() => renderNewsScreen(newsBodyEl)), CONFIG.news.refreshInterval);
+  setInterval(() => fetchNews().then(showNewsOrBirthday), CONFIG.news.refreshInterval);
   setTimeout(() => location.reload(), CONFIG.pageReload);
 }
 

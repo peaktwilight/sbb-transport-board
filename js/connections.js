@@ -52,26 +52,3 @@ function renderSection({ destination, connections }) {
   return section;
 }
 
-export function appendConnection(data, container) {
-  const loading = container.querySelector('.connections-loading');
-  if (loading) loading.remove();
-
-  const existing = container.querySelector(`[data-destination="${data.destination}"]`);
-  const section = renderSection(data);
-  if (existing) existing.replaceWith(section);
-  else container.appendChild(section);
-}
-
-export function updateConnectionCountdowns(container) {
-  for (const row of container.querySelectorAll('.connection-row')) {
-    const dep = row.dataset.departure;
-    if (!dep) continue;
-    const countdown = getCountdown(dep);
-    if (countdown.totalSecs <= 0) { row.remove(); continue; }
-    const el = row.querySelector('.conn-minutes');
-    if (el) {
-      el.textContent = countdown.text;
-      el.className = `conn-minutes led-text ${countdown.mins < 3 ? 'minutes--imminent' : countdown.mins <= 5 ? 'minutes--soon' : ''}`;
-    }
-  }
-}

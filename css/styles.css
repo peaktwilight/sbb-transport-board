@@ -424,168 +424,6 @@ body::after {
   50% { opacity: 0.4; }
 }
 
-/* ---- Connections (bigger for full-screen) ---- */
-
-.connections-loading {
-  padding: 2em 1.2em;
-  text-align: center;
-  font-size: 1rem;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-.connection-section {
-  padding: 0.8em 1.2em;
-  border-bottom: 1px solid var(--board-border);
-}
-
-.connection-header {
-  margin-bottom: 0.4em;
-}
-
-.connection-destination {
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-weight: 700;
-}
-
-.connection-row {
-  display: grid;
-  grid-template-columns: auto 70px 70px 70px;
-  align-items: center;
-  gap: 0.5em;
-  padding: 0.35em 0;
-  font-size: 1rem;
-  animation: rowFadeIn 0.3s ease;
-}
-
-.connection-row--header {
-  font-size: 0.8rem;
-  color: var(--white-dim);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-weight: 400;
-  padding: 0.5em 1.2em;
-  border-bottom: none;
-  animation: none;
-}
-
-.connection-row--header > div {
-  color: var(--white-dim);
-  text-shadow: none;
-  font-size: inherit;
-  font-weight: inherit;
-}
-
-.conn-badge {
-  min-width: 60px;
-}
-
-.conn-depart {
-  font-variant-numeric: tabular-nums;
-}
-
-.conn-minutes {
-  text-align: right;
-  font-weight: 800;
-}
-
-.conn-arrive {
-  font-size: 0.85rem;
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-/* ---- Markets screen ---- */
-
-.markets-grid {
-  padding: 0.6em 1.2em;
-  max-width: 100%;
-  overflow: hidden;
-}
-
-.market-row {
-  display: grid;
-  grid-template-columns: 55px 1fr 1fr 80px;
-  align-items: center;
-  gap: 0.4em;
-  padding: 0.6em 0;
-  border-bottom: 1px solid rgba(255, 179, 0, 0.06);
-  animation: rowFadeIn 0.4s ease;
-  min-width: 0;
-}
-
-.market-row:nth-child(even) {
-  background: rgba(255, 179, 0, 0.025);
-}
-
-.market-symbol {
-  font-size: 1.3rem;
-  font-weight: 800;
-  color: var(--white-led);
-  text-shadow: var(--glow-white);
-}
-
-.market-name {
-  font-size: 0.8rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  min-width: 0;
-}
-
-.market-price {
-  font-size: 1.1rem;
-  font-variant-numeric: tabular-nums;
-  text-align: right;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  min-width: 0;
-}
-
-.market-currency {
-  font-size: 0.7rem;
-  color: var(--white-dim);
-  font-weight: 400;
-}
-
-.market-change {
-  min-width: 80px;
-  text-align: right;
-  font-size: 1rem;
-  font-weight: 700;
-}
-
-.market-up {
-  color: var(--green-led);
-  text-shadow: 0 0 6px rgba(0, 204, 68, 0.4);
-}
-
-.market-down {
-  color: var(--red-led);
-  text-shadow: var(--glow-red);
-}
-
-.market-section-header {
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-weight: 700;
-  padding: 0.8em 0 0.3em;
-  border-bottom: 1px solid var(--board-border);
-  margin-bottom: 0.2em;
-}
-
-.market-section-header:first-child {
-  padding-top: 0;
-}
-
-.market-updated {
-  text-align: center;
-  padding: 1em;
-  font-size: 0.7rem;
-}
 
 /* ---- Info screen ---- */
 
@@ -816,6 +654,206 @@ body::after {
   animation-delay: calc(var(--i, 0) * 40ms);
 }
 
+/* ---- Birthday celebration ---- */
+
+.birthday-screen {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  overflow: hidden;
+}
+
+.birthday-screen::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  height: 600px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(255, 179, 0, 0.08) 0%, transparent 70%);
+  animation: birthday-ambient 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes birthday-ambient {
+  0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
+}
+
+.birthday-sparkles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.birthday-spark {
+  position: absolute;
+  bottom: -10px;
+  border-radius: 50%;
+  background: var(--amber);
+  box-shadow: 0 0 6px rgba(255, 179, 0, 0.6), 0 0 12px rgba(255, 179, 0, 0.3);
+  animation: spark-rise linear forwards;
+  opacity: 0;
+}
+
+@keyframes spark-rise {
+  0% { opacity: 0; transform: translateY(0) scale(1); }
+  10% { opacity: 1; }
+  70% { opacity: 0.6; }
+  100% { opacity: 0; transform: translateY(-100vh) scale(0.3); }
+}
+
+.birthday-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+}
+
+.cake-art {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 1.2rem;
+  line-height: 1.3;
+  text-align: center;
+  color: var(--amber);
+  text-shadow: var(--glow-amber);
+}
+
+.cake-flame {
+  color: var(--amber-glow);
+  text-shadow: 0 0 8px rgba(255, 204, 0, 0.8), 0 0 20px rgba(255, 179, 0, 0.4);
+  animation: flame-flicker 0.4s ease-in-out infinite alternate;
+}
+
+.cake-candle {
+  color: var(--white-led);
+  text-shadow: var(--glow-white);
+}
+
+.cake-tier {
+  color: var(--amber);
+  text-shadow: var(--glow-amber);
+}
+
+.cake-tier2 {
+  color: var(--amber-dim);
+  text-shadow: 0 0 6px rgba(179, 125, 0, 0.4);
+}
+
+@keyframes flame-flicker {
+  0% { opacity: 0.7; transform: translateY(0); }
+  100% { opacity: 1; transform: translateY(-1px); }
+}
+
+.birthday-greeting {
+  text-align: center;
+}
+
+.birthday-label {
+  font-size: 3.5rem;
+  font-weight: 800;
+  text-shadow: 0 0 10px rgba(255, 179, 0, 0.6), 0 0 30px rgba(255, 179, 0, 0.2);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.birthday-name {
+  font-family: 'Doto', monospace;
+  font-size: 5rem;
+  font-weight: 800;
+  color: var(--white-led);
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.5), 0 0 40px rgba(255, 255, 255, 0.15);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  animation: name-glow 2s ease-in-out infinite;
+  margin-top: 0.1em;
+}
+
+@keyframes name-glow {
+  0%, 100% {
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.5), 0 0 40px rgba(255, 255, 255, 0.15);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.7), 0 0 60px rgba(255, 255, 255, 0.3), 0 0 80px rgba(255, 179, 0, 0.15);
+  }
+}
+
+.birthday-subtitle {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 1.2rem;
+  color: var(--amber-dim);
+  max-width: 80%;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* Staggered entrance — birthday in news */
+.screen--entering[data-screen="news"] .birthday-cake {
+  animation: row-enter 0.4s ease-out both;
+}
+.screen--entering[data-screen="news"] .birthday-greeting {
+  animation: row-enter 0.4s ease-out both;
+  animation-delay: 150ms;
+}
+.screen--entering[data-screen="news"] .birthday-subtitle {
+  animation: row-enter 0.4s ease-out both;
+  animation-delay: 300ms;
+}
+
+/* Upcoming birthdays list */
+.birthday-upcoming {
+  border-top: 1px solid var(--board-border);
+  margin-top: 0.6em;
+  padding-top: 0.6em;
+}
+
+.birthday-upcoming-header {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  padding: 0.3em 1.2em;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.birthday-upcoming-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.35em 1.2em;
+  font-size: 0.95rem;
+  border-bottom: 1px solid rgba(255, 179, 0, 0.04);
+}
+
+.birthday-upcoming-name {
+  font-weight: 700;
+}
+
+.birthday-upcoming-date {
+  font-size: 0.85rem;
+}
+
+.birthday-today {
+  font-weight: 800;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+  .birthday-label { font-size: 2.2rem; }
+  .birthday-name { font-size: 3rem; }
+  .cake-art { font-size: 0.9rem; }
+  .birthday-subtitle { font-size: 1rem; }
+}
+
 /* ---- Portrait / small screens ---- */
 
 @media (max-width: 768px) {
@@ -823,10 +861,6 @@ body::after {
 
   .departure-row {
     grid-template-columns: 90px 1fr 80px 65px;
-  }
-
-  .connection-row {
-    grid-template-columns: auto 60px 60px 60px;
   }
 
   .station-name { font-size: 1.4rem; }

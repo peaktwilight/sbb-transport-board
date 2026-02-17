@@ -3,21 +3,17 @@ import { CONFIG } from './config.js';
 const BADGE_COLORS = {
   SWISSINFO: '#e2001a',
   SRF: '#c82828',
-  BBC: '#1a73e8',
   Guardian: '#052962',
   Reuters: '#ffffff',
-  'FIN. TIMES': '#fff1e5',
   'HACKER NEWS': '#ff6000',
-  '20MIN': '#2a7de1',
+  TechCrunch: '#0a9e01',
   'LE NEWS': '#1b5e20',
-  'LOCAL (CH)': '#6b3a2a',
   'FINTECH CH': '#00b4d8',
   'NEW YORK TIMES': '#ffffff',
+  'LOCAL (CH)': '#6b3a2a',
   NASA: '#0b3d91',
   SCIENCEDAILY: '#2e7d32',
   'ARS TECHNICA': '#ff4e00',
-  EURONEWS: '#003366',
-  TechCrunch: '#0a9e01',
 };
 
 let cachedHeadlines = [];
@@ -100,7 +96,7 @@ export function renderNewsScreen(container) {
   }
   cachedHeadlines.forEach((h, i) => {
     const color = BADGE_COLORS[h.label] || '#555';
-    const isLight = ['FIN. TIMES', 'Reuters', 'NEW YORK TIMES'].includes(h.label);
+    const isLight = ['Reuters', 'NEW YORK TIMES'].includes(h.label);
     const ago = timeAgo(h.pubDate);
     const row = document.createElement('div');
     row.className = 'news-row';

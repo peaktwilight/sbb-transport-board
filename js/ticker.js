@@ -1,3 +1,5 @@
+import { getTodaysBirthdays, getBirthdayTickerMessages } from './birthday.js';
+
 const ALWAYS = [
   'Walk to Balgrist stop: ~4 min (1 min if you\'re feeling lucky and wanna sprint)',
   'Made with \u2665 for the best WG in Zürich',
@@ -249,6 +251,10 @@ export function buildTicker(element, weatherCode, temp, marketItems = []) {
 
   const weatherMsgs = getWeatherMessages(weatherCode, temp);
   if (weatherMsgs.length) messages.push(...pick(weatherMsgs, 2));
+
+  // Birthday messages
+  const todayBirthdays = getTodaysBirthdays();
+  if (todayBirthdays.length) messages.push(...getBirthdayTickerMessages(todayBirthdays));
 
   const selected = messages.sort(() => Math.random() - 0.5);
 

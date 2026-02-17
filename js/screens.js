@@ -1,5 +1,3 @@
-import { CONFIG } from './config.js';
-
 const screens = [];
 let current = 0;
 let progressEl = null;
@@ -53,6 +51,7 @@ function restartAutoTimer() {
   resetProgress();
   startAutoTimer();
 }
+
 
 function goTo(target) {
   const prev = screens[current];
