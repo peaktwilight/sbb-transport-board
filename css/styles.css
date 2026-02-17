@@ -525,7 +525,7 @@ body::after {
   height: var(--footer-height);
   background: var(--board-surface);
   border-top: 1px solid var(--board-border);
-  overflow: hidden;
+  overflow: visible;
   display: flex;
   align-items: center;
   z-index: 200;
@@ -569,6 +569,9 @@ body::after {
   font-size: 0.85rem;
   font-weight: 400;
   letter-spacing: 0.05em;
+  overflow: hidden;
+  flex: 1;
+  min-width: 0;
 }
 
 .ticker-track span {
@@ -603,13 +606,13 @@ body::after {
 .kitchen-shame-wrapper {
   position: relative;
   flex-shrink: 0;
-  z-index: 1;
+  z-index: 50;
 }
 
 .kitchen-shame-btn {
   background: var(--board-surface);
   border: none;
-  border-left: 1px solid var(--board-border);
+  border-right: 1px solid var(--board-border);
   color: var(--red-led);
   font-size: 1rem;
   padding: 0.4em 0.8em;
@@ -626,7 +629,7 @@ body::after {
   display: none;
   position: absolute;
   bottom: calc(100% + 4px);
-  right: 0;
+  left: 0;
   background: var(--board-surface);
   border: 1px solid var(--board-border);
   border-radius: 6px;

@@ -18,7 +18,7 @@ const SHAME_MESSAGES = [
 let audio = null;
 let lastShameTime = 0;
 
-const PREFIX = '[ANONYMOUS TABLET DASHBOARD MESSAGE BOT]';
+const PREFIX = 'ANONYMOUS TABLET DASHBOARD MESSAGE';
 
 function getShameMessage(side) {
   const msg = SHAME_MESSAGES[Math.floor(Math.random() * SHAME_MESSAGES.length)];
