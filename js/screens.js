@@ -35,7 +35,7 @@ export function initScreens(progressElement, onScreenSwitch) {
   startAutoTimer();
 }
 
-const SCREEN_DURATIONS = [12_000, 8_000]; // departures longer, weather shorter
+const SCREEN_DURATIONS = [12_000, 8_000, 10_000]; // departures, weather, news
 
 function getDuration() {
   return SCREEN_DURATIONS[current] || SCREEN_DURATIONS[0];

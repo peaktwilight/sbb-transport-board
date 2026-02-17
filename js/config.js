@@ -45,12 +45,37 @@ export const CONFIG = {
   // Markets screen
   markets: {
     crypto: ['bitcoin', 'ethereum', 'solana', 'dogecoin'],
-    stocks: ['NVDA', 'AAPL', 'GOOGL'],
     forex: [
       { from: 'USD', to: 'CHF' },
       { from: 'EUR', to: 'CHF' },
     ],
     refreshInterval: 5 * 60_000,
+  },
+
+  // News screen
+  news: {
+    feeds: [
+      { label: 'SWISSINFO', url: 'https://cdn.prod.swi-services.ch/rss/eng/rssxml/latest-news/rss' },
+      { label: 'SRF', url: 'https://www.srf.ch/news/bnf/rss/1890' },
+      // { label: 'BBC', url: 'https://feeds.bbci.co.uk/news/world/rss.xml' },
+      { label: 'Guardian', url: 'https://www.theguardian.com/world/rss' },
+      { label: 'Reuters', url: 'https://news.google.com/rss/search?q=when:24h+allinurl:reuters.com&ceid=US:en&hl=en-US&gl=US' },
+      // { label: 'FIN. TIMES', url: 'https://www.ft.com/world?format=rss' },
+      { label: 'HACKER NEWS', url: 'https://hnrss.org/frontpage' },
+      { label: 'TechCrunch', url: 'https://techcrunch.com/feed/' },
+      { label: '20MIN', url: 'https://partner-feeds.publishing.20min.ch/rss/20minuten' },
+      { label: 'LE NEWS', url: 'https://lenews.ch/feed/' },
+      { label: 'FINTECH CH', url: 'https://fintechnews.ch/feed/' },
+      { label: 'NEW YORK TIMES', url: 'https://www.nytimes.com/svc/collections/v1/publish/https://www.nytimes.com/topic/destination/switzerland/rss.xml' },
+      { label: 'LOCAL (CH)', url: 'https://feeds.thelocal.com/rss/ch' },
+      { label: 'NASA', url: 'https://www.nasa.gov/news-release/feed/' },
+      { label: 'SCIENCEDAILY', url: 'https://www.sciencedaily.com/rss/top/science.xml' },
+      { label: 'ARS TECHNICA', url: 'https://feeds.arstechnica.com/arstechnica/index' },
+      // { label: 'EURONEWS', url: 'https://feeds.feedburner.com/euronews/en/home/' },
+    ],
+    refreshInterval: 10 * 60_000,
+    itemsPerFeed: 10,
+    maxTitleLength: 100,
   },
 
   // ZVV per-line colors (override category default)

@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#0a0a0a">
   <title>Balgrist Departures</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -35,6 +34,7 @@
   <nav class="screen-tabs" id="screen-tabs">
     <button class="screen-tab screen-tab--active" data-target="0"><i class="ph-bold ph-train-simple"></i> Departures</button>
     <button class="screen-tab" data-target="1"><i class="ph-bold ph-cloud-sun"></i> Weather</button>
+    <button class="screen-tab" data-target="2"><i class="ph-bold ph-newspaper"></i> News</button>
   </nav>
   <div class="screen-container">
     <!-- Screen 1: Departures -->
@@ -56,6 +56,18 @@
         <div class="info-weather" id="info-weather"></div>
         <div class="info-message led-text" id="info-message"></div>
       </div>
+    </section>
+
+    <!-- Screen 3: News -->
+    <section class="screen" data-screen="news">
+      <div class="screen-header">
+        <div class="news-row news-row--header">
+          <div class="news-source">Source</div>
+          <div class="news-headline">Headlines</div>
+          <div class="news-time">Time</div>
+        </div>
+      </div>
+      <div id="news-body" class="screen-body"></div>
     </section>
   </div>
 

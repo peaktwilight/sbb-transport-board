@@ -7,16 +7,8 @@ const CRYPTO_NAMES = {
   dogecoin: { symbol: 'DOGE', name: 'Dogecoin' },
 };
 
-const STOCK_NAMES = {
-  NVDA: 'NVIDIA',
-  AAPL: 'Apple',
-  GOOGL: 'Alphabet',
-};
-
 let cachedCrypto = null;
-let cachedStocks = null;
 let cachedForex = null;
-let lastFetchTime = null;
 
 async function fetchCrypto() {
   const ids = CONFIG.markets.crypto.join(',');
@@ -24,27 +16,6 @@ async function fetchCrypto() {
   const res = await fetch(url);
   if (!res.ok) throw new Error(`CoinGecko error: ${res.status}`);
   return res.json();
-}
-
-async function fetchStocks() {
-  const symbols = CONFIG.markets.stocks;
-  const results = {};
-  for (const symbol of symbols) {
-    try {
-      const url = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?range=1d&interval=1d`;
-      const res = await fetch(url);
-      if (!res.ok) continue;
-      const data = await res.json();
-      const meta = data.chart.result[0].meta;
-      const price = meta.regularMarketPrice;
-      const prevClose = meta.chartPreviousClose || meta.previousClose;
-      const change = prevClose ? ((price - prevClose) / prevClose) * 100 : null;
-      results[symbol] = { price, change, currency: meta.currency };
-    } catch {
-      // Yahoo Finance may block CORS — fail silently per stock
-    }
-  }
-  return Object.keys(results).length ? results : null;
 }
 
 async function fetchForex() {
@@ -77,15 +48,12 @@ function changeHtml(change) {
 
 export async function fetchMarkets() {
   try {
-    const [crypto, stocks, forex] = await Promise.all([
+    const [crypto, forex] = await Promise.all([
       fetchCrypto().catch(() => null),
-      fetchStocks().catch(() => null),
       fetchForex().catch(() => []),
     ]);
     if (crypto) cachedCrypto = crypto;
-    if (stocks) cachedStocks = stocks;
     if (forex.length) cachedForex = forex;
-    lastFetchTime = Date.now();
   } catch (err) {
     console.warn('Markets fetch failed:', err);
   }
@@ -100,14 +68,6 @@ export function getTickerItems() {
       if (!data) continue;
       const info = CRYPTO_NAMES[id] || { symbol: id.toUpperCase() };
       items.push(`${info.symbol} ${formatPrice(data.chf)} CHF${changeHtml(data.chf_24h_change)}`);
-    }
-  }
-
-  if (cachedStocks) {
-    for (const symbol of CONFIG.markets.stocks) {
-      const data = cachedStocks[symbol];
-      if (!data) continue;
-      items.push(`${symbol} ${formatPrice(data.price)} ${data.currency}${changeHtml(data.change)}`);
     }
   }
 

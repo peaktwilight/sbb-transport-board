@@ -745,6 +745,77 @@ body::after {
   100% { transform: translateX(-50%); }
 }
 
+/* ---- News screen ---- */
+
+.news-row {
+  display: grid;
+  grid-template-columns: auto 1fr 50px;
+  align-items: center;
+  gap: 0.8em;
+  padding: 0.6em 1.2em;
+  border-bottom: 1px solid rgba(255, 179, 0, 0.06);
+}
+
+.news-row:nth-child(even) {
+  background: rgba(255, 179, 0, 0.025);
+}
+
+.news-row--header {
+  font-size: 0.8rem;
+  color: var(--white-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 400;
+  border-bottom: none;
+  animation: none;
+}
+
+.news-row--header > div {
+  color: var(--white-dim);
+  text-shadow: none;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.news-badge {
+  display: inline-block;
+  padding: 0.15em 0.5em;
+  border-radius: 3px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: none;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  min-width: 5em;
+  text-align: center;
+}
+
+.news-headline {
+  font-size: 1.05rem;
+  line-height: 1.3;
+}
+
+.news-time {
+  text-align: right;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.news-loading {
+  padding: 2em 1.2em;
+  text-align: center;
+  font-size: 1rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Staggered entrance — news */
+.screen--entering[data-screen="news"] .news-row {
+  animation: row-enter 0.3s ease-out both;
+  animation-delay: calc(var(--i, 0) * 40ms);
+}
+
 /* ---- Portrait / small screens ---- */
 
 @media (max-width: 768px) {

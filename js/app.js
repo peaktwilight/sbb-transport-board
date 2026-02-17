@@ -7,6 +7,7 @@ import { buildTicker } from './ticker.js';
 import { initScreens } from './screens.js';
 import { updateInfoScreen } from './info.js';
 import { fetchMarkets, getTickerItems } from './stocks.js';
+import { fetchNews, renderNewsScreen } from './news.js';
 
 const $ = (id) => document.getElementById(id);
 const clockEl = $('clock');
@@ -18,6 +19,7 @@ const headerDayEl = $('header-day');
 const headerDateEl = $('header-date');
 const infoWeatherEl = $('info-weather');
 const infoMessageEl = $('info-message');
+const newsBodyEl = $('news-body');
 
 let currentDepartures = [];
 let lastSuccessTime = Date.now();
@@ -64,12 +66,14 @@ async function init() {
   requestWakeLock();
   initScreens(progressEl, (screen) => {
     if (screen === 'info') updateInfoScreen(infoWeatherEl, infoMessageEl);
+    if (screen === 'news') renderNewsScreen(newsBodyEl);
   });
   updateInfoScreen(infoWeatherEl, infoMessageEl);
   buildTicker(tickerEl, null, null, []);
 
   updateStationboard();
   fetchMarkets().then(rebuildTicker);
+  fetchNews().then(() => renderNewsScreen(newsBodyEl));
 
   fetchWeather().then(() => {
     rebuildTicker();
@@ -80,6 +84,7 @@ async function init() {
   setInterval(tick, CONFIG.clockRefresh);
   setInterval(() => fetchWeather(), CONFIG.weatherRefresh);
   setInterval(() => fetchMarkets().then(rebuildTicker), CONFIG.markets.refreshInterval);
+  setInterval(() => fetchNews().then(() => renderNewsScreen(newsBodyEl)), CONFIG.news.refreshInterval);
   setTimeout(() => location.reload(), CONFIG.pageReload);
 }
 
