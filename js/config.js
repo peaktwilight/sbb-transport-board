@@ -10,6 +10,9 @@ export const CONFIG = {
 
   walkingTime: 4, // minutes to walk to Balgrist stop
 
+  // Hide departures going away from the city
+  excludeDestinations: ['Rehalp', 'Esslingen', 'Zollikon'],
+
   categoryClasses: {
     T: 'line-badge--tram',
     B: 'line-badge--bus',

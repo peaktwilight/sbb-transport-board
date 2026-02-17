@@ -28,7 +28,11 @@ const todayBirthdays = getTodaysBirthdays();
 
 async function updateStationboard() {
   try {
-    currentDepartures = await fetchStationboard();
+    const all = await fetchStationboard();
+    const exclude = CONFIG.excludeDestinations || [];
+    currentDepartures = all.filter((dep) =>
+      !exclude.some((ex) => dep.to.includes(ex))
+    );
     renderStationboard(currentDepartures, departuresEl);
     lastSuccessTime = Date.now();
     setStatus('ok');
