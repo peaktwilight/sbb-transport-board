@@ -62,9 +62,17 @@ async function fetchFeed(feed) {
   }
 }
 
+function delay(ms) {
+  return new Promise((r) => setTimeout(r, ms));
+}
+
 export async function fetchNews() {
   try {
-    const results = await Promise.all(CONFIG.news.feeds.map(fetchFeed));
+    const results = [];
+    for (const feed of CONFIG.news.feeds) {
+      results.push(await fetchFeed(feed));
+      await delay(300);
+    }
     const all = results.flat().filter((h) => h.title);
     all.sort((a, b) => b.pubDate - a.pubDate);
     if (all.length) cachedHeadlines = all;

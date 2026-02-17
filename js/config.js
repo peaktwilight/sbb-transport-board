@@ -63,7 +63,7 @@ export const CONFIG = {
       // { label: 'FIN. TIMES', url: 'https://www.ft.com/world?format=rss' },
       { label: 'HACKER NEWS', url: 'https://hnrss.org/frontpage' },
       { label: 'TechCrunch', url: 'https://techcrunch.com/feed/' },
-      { label: '20MIN', url: 'https://partner-feeds.publishing.20min.ch/rss/20minuten' },
+      // { label: '20MIN', url: 'https://partner-feeds.publishing.20min.ch/rss/20minuten' },
       { label: 'LE NEWS', url: 'https://lenews.ch/feed/' },
       { label: 'FINTECH CH', url: 'https://fintechnews.ch/feed/' },
       { label: 'NEW YORK TIMES', url: 'https://www.nytimes.com/svc/collections/v1/publish/https://www.nytimes.com/topic/destination/switzerland/rss.xml' },
