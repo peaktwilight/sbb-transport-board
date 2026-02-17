@@ -1,6 +1,5 @@
 import { CONFIG } from './config.js';
 
-const CAKE_ICON = '<i class="ph-bold ph-cake birthday-icon"></i>';
 
 const BIRTHDAY_TICKER = [
   (n) => `HAPPY BIRTHDAY ${n.toUpperCase()}!!! The whole WG is celebrating`,
@@ -69,7 +68,6 @@ export function renderBirthdayNews(container, birthdays) {
   container.innerHTML = `
     <div class="birthday-screen">
       <div class="birthday-content">
-        <div class="birthday-cake">${CAKE_ICON}</div>
         <div class="birthday-greeting">
           <div class="birthday-label led-text">HAPPY BIRTHDAY</div>
           <div class="birthday-name">${names}</div>

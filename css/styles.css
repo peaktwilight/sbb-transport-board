@@ -675,12 +675,6 @@ body::after {
   gap: 1em;
 }
 
-.birthday-icon {
-  font-size: 3rem;
-  color: var(--amber);
-  text-shadow: var(--glow-amber);
-}
-
 .birthday-greeting {
   text-align: center;
 }
@@ -714,9 +708,6 @@ body::after {
 }
 
 /* Staggered entrance — birthday in news */
-.screen--entering[data-screen="news"] .birthday-cake {
-  animation: row-enter 0.4s ease-out both;
-}
 .screen--entering[data-screen="news"] .birthday-greeting {
   animation: row-enter 0.4s ease-out both;
   animation-delay: 150ms;
@@ -769,7 +760,6 @@ body::after {
 @media (max-width: 768px) {
   .birthday-label { font-size: 1.5rem; }
   .birthday-name { font-size: 2rem; }
-  .birthday-icon { font-size: 2.5rem; }
   .birthday-subtitle { font-size: 0.85rem; }
 }
 
