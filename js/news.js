@@ -101,11 +101,24 @@ export function renderNewsScreen(container) {
     const row = document.createElement('div');
     row.className = 'news-row';
     row.style.setProperty('--i', i);
-    row.innerHTML = `
-      <div class="news-source"><span class="news-badge" style="background:${color}${isLight ? ';color:#111' : ''}">${h.label}</span></div>
-      <div class="news-headline led-text">${h.title}</div>
-      <div class="news-time led-text-dim">${ago}</div>
-    `;
+    const source = document.createElement('div');
+    source.className = 'news-source';
+    const badge = document.createElement('span');
+    badge.className = 'news-badge';
+    badge.style.background = color;
+    if (isLight) badge.style.color = '#111';
+    badge.textContent = h.label;
+    source.appendChild(badge);
+
+    const headline = document.createElement('div');
+    headline.className = 'news-headline led-text';
+    headline.textContent = h.title;
+
+    const time = document.createElement('div');
+    time.className = 'news-time led-text-dim';
+    time.textContent = ago;
+
+    row.append(source, headline, time);
     container.appendChild(row);
   });
 }
